@@ -1,11 +1,11 @@
-const express = require('express');
-const cors = require('cors');
-const { GoogleGenerativeAI } = require('@google/generative-ai');
+import express from 'express';
+import cors from 'cors';
+import { GoogleGenerativeAI } from '@google/generative-ai';
 
 const app = express();
 const port = process.env.PORT || 10000;
 
-// РАЗРЕШАЕМ ПОДКЛЮЧЕНИЯ ОТОВСЮДУ (чтобы Netlify точно пробился)
+// Разрешаем подключения отовсюду
 app.use(cors({
   origin: '*',
   methods: ['GET', 'POST', 'OPTIONS'],
@@ -14,12 +14,16 @@ app.use(cors({
 
 app.use(express.json());
 
-// 1. Проверка, что сервер живой (сюда стучится кнопка на сайте)
+// 1. Проверка, что сервер живой
 app.get('/api/health', (req, res) => {
-  res.json({ status: 'ok', message: 'LeadPilot Backend is alive!' });
+  res.json({ 
+    status: 'ok', 
+    message: 'LeadPilot Backend is alive!',
+    aiConfigured: !!process.env.GEMINI_API_KEY 
+  });
 });
 
-// 2. Эндпоинт для генерации текста через ИИ
+// 2. Генерация текста через ИИ
 app.post('/api/generate', async (req, res) => {
   try {
     const { prompt } = req.body;
@@ -30,11 +34,10 @@ app.post('/api/generate', async (req, res) => {
 
     const apiKey = process.env.GEMINI_API_KEY;
     if (!apiKey) {
-      return res.status(500).json({ error: 'Ключ GEMINI_API_KEY не найден в настройках' });
+      return res.status(500).json({ error: 'Ключ GEMINI_API_KEY не найден' });
     }
 
     const genAI = new GoogleGenerativeAI(apiKey);
-    // Используем быструю и бесплатную модель
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
     const result = await model.generateContent(prompt);
