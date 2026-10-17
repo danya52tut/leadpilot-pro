@@ -5,16 +5,17 @@ import { GoogleGenerativeAI } from '@google/generative-ai';
 const app = express();
 const port = process.env.PORT || 10000;
 
-// Разрешаем подключения отовсюду
+// Максимально открытый CORS для Safari и Netlify
 app.use(cors({
   origin: '*',
   methods: ['GET', 'POST', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  optionsSuccessStatus: 200
 }));
 
 app.use(express.json());
 
-// 1. Проверка, что сервер живой
+// Проверка статуса сервера
 app.get('/api/health', (req, res) => {
   res.json({ 
     status: 'ok', 
@@ -23,13 +24,14 @@ app.get('/api/health', (req, res) => {
   });
 });
 
-// 2. Генерация текста через ИИ
-app.post('/api/generate', async (req, res) => {
+// Обработчик генерации (принимает и /api/generate, и /api/chat на всякий случай)
+app.post(['/api/generate', '/api/chat'], async (req, res) => {
   try {
-    const { prompt } = req.body;
-    
-    if (!prompt) {
-      return res.status(400).json({ error: 'Нет текста для генерации (prompt)' });
+    // Ищем текст в разных возможных полях (prompt, text, message)
+    const promptText = req.body.prompt || req.body.text || req.body.message;
+
+    if (!promptText) {
+      return res.status(400).json({ error: 'Нет текста для генерации' });
     }
 
     const apiKey = process.env.GEMINI_API_KEY;
@@ -38,9 +40,10 @@ app.post('/api/generate', async (req, res) => {
     }
 
     const genAI = new GoogleGenerativeAI(apiKey);
+    // Используем актуальную модель
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-    const result = await model.generateContent(prompt);
+    const result = await model.generateContent(promptText);
     const response = await result.response;
     const text = response.text();
 
@@ -51,7 +54,6 @@ app.post('/api/generate', async (req, res) => {
   }
 });
 
-// Запуск сервера
 app.listen(port, () => {
-  console.log(`LeadPilot backend listening on ${port}`);
+  console.log(`LeadPilot backend listening on port ${port}`);
 });
