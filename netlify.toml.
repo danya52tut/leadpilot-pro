@@ -1,0 +1,7 @@
+```toml
+[[redirects]]
+  from = "/api/*"
+  to = "https://leadpilot-pro.onrender.com/api/:splat"
+  status = 200
+  force = true
+```
