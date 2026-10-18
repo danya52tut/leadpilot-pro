@@ -1,105 +1,847 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#10121d"><title>LeadPilot Pro — система роста</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080b12">
+<title>LeadPilot Pro — AI Sales Workspace</title>
 <style>
-:root{--bg:#10121d;--panel:#191d2b;--panel2:#20253a;--line:#30364c;--text:#f3f5ff;--muted:#a8afc6;--accent:#9b8cff;--green:#58d6a5;--yellow:#f5c96b;--red:#ff7f91}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top right,#29254e 0,transparent 35%),var(--bg);color:var(--text);font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}button,input,select,textarea{font:inherit}button{cursor:pointer;border:1px solid var(--line);border-radius:12px;padding:11px 14px;background:var(--panel2);color:var(--text)}button.primary{background:linear-gradient(135deg,#8274f4,#5e52c8);border:0;font-weight:700}button.subtle{background:transparent}button.danger{color:#ffb7c1}.wrap{max-width:1180px;margin:auto;padding:18px}.top{display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:20px}.brand{display:flex;gap:12px;align-items:center}.logo{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,#9b8cff,#5c50c4);font-weight:900;font-size:20px}.brand h1{font-size:20px;margin:0}.brand p{margin:2px 0 0;color:var(--muted);font-size:12px}.top-actions{display:flex;gap:8px;flex-wrap:wrap}.notice{border:1px solid #514a82;background:#272344;padding:12px 14px;border-radius:14px;color:#ddd8ff;margin-bottom:18px}.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:18px}.stat,.card{background:rgba(25,29,43,.95);border:1px solid var(--line);border-radius:18px;padding:16px}.stat .label{color:var(--muted);font-size:13px}.stat .num{font-size:27px;font-weight:800;margin-top:4px}.stat .foot{font-size:12px;color:var(--green);margin-top:4px}.layout{display:grid;grid-template-columns:220px minmax(0,1fr);gap:16px}.nav{display:flex;flex-direction:column;gap:7px;align-self:start;position:sticky;top:10px}.nav button{text-align:left;background:transparent;border-color:transparent;color:var(--muted)}.nav button.active{background:#2b2850;color:white;border-color:#514a82}.nav .navlabel{font-size:11px;color:#737c9c;text-transform:uppercase;letter-spacing:1.4px;padding:12px 10px 4px}.main{min-width:0}.view{display:none}.view.active{display:block}.head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap;margin-bottom:14px}.head h2{font-size:23px;margin:0}.head p{color:var(--muted);margin:4px 0 0}.row{display:flex;gap:9px;flex-wrap:wrap;align-items:center}.filters{display:grid;grid-template-columns:1fr 160px 140px;gap:8px;margin:12px 0}input,select,textarea{width:100%;padding:12px;border-radius:11px;border:1px solid var(--line);background:#10131f;color:var(--text);min-width:0}textarea{min-height:110px;resize:vertical}.list{display:grid;gap:10px}.lead{border:1px solid var(--line);border-radius:16px;padding:15px;background:#171b29}.leadtop{display:flex;gap:12px;justify-content:space-between;align-items:flex-start}.lead h3{margin:0;font-size:17px;overflow-wrap:anywhere}.meta{color:var(--muted);font-size:13px;margin-top:4px;overflow-wrap:anywhere}.pill{display:inline-flex;padding:4px 9px;border-radius:999px;background:#302b53;color:#ddd7ff;font-size:12px;white-space:nowrap}.score{font-size:20px;font-weight:800;color:var(--green)}.leadnote{margin:11px 0;color:#d4d8e9}.actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.actions button{font-size:13px;padding:9px 11px}.small{font-size:12px;color:var(--muted)}.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.field{display:grid;gap:6px;margin-bottom:12px}.field label{font-size:13px;color:var(--muted)}.empty{padding:28px 15px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:15px}.source{display:flex;justify-content:space-between;gap:10px;padding:13px;border:1px solid var(--line);border-radius:13px;margin-bottom:9px}.source strong{display:block}.source p{margin:3px 0 0;color:var(--muted);font-size:12px;overflow-wrap:anywhere}.status{color:var(--yellow);font-size:12px}.draft{white-space:pre-wrap;line-height:1.6;background:#10131f;padding:14px;border-radius:12px;border:1px solid var(--line);margin-top:10px}.bar{height:8px;border-radius:9px;background:#30364c;overflow:hidden;margin:8px 0 14px}.bar span{display:block;height:100%;background:linear-gradient(90deg,#8174f4,#58d6a5)}.tablewrap{overflow:auto}table{border-collapse:collapse;width:100%;min-width:540px}td,th{text-align:left;padding:10px;border-bottom:1px solid var(--line);font-size:13px}th{color:var(--muted);font-weight:600}.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:#292d40;border:1px solid #555d7c;border-radius:13px;padding:12px 16px;max-width:90%;display:none;z-index:10}.footnote{font-size:12px;color:var(--muted);margin-top:15px}dialog{width:min(650px,94vw);max-height:88vh;overflow:auto;border:1px solid var(--line);border-radius:18px;background:var(--panel);color:var(--text);padding:20px}dialog::backdrop{background:#000a}.modalhead{display:flex;justify-content:space-between;gap:10px;align-items:center}.modalhead h3{margin:0}.close{padding:5px 10px}
-@media(max-width:760px){.wrap{padding:12px}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.layout{grid-template-columns:1fr}.nav{position:static;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}.nav button{text-align:center;font-size:12px;padding:9px 4px}.nav .navlabel{display:none}.grid2,.grid3{grid-template-columns:1fr}.filters{grid-template-columns:1fr 1fr}.filters input{grid-column:1/-1}.head h2{font-size:21px}}
-</style></head>
-<body><div class="wrap">
-<header class="top"><div class="brand"><div class="logo">LP</div><div><h1>LeadPilot Pro</h1><p>Система поиска возможностей и роста продаж</p></div></div><div class="top-actions"><button class="subtle" id="exportBtn">Экспорт базы</button><button class="primary" id="addBtn">+ Добавить лид</button></div></header>
-<div class="notice"><b>Режим пилота.</b> Сейчас интерфейс ведёт базу, считает приоритеты и готовит черновики. Автопоиск и постоянный мониторинг включатся после подключения серверных источников и ИИ — сайт сам по себе не может надёжно сканировать весь интернет.</div>
-<section class="stats">
-<div class="stat"><div class="label">Лиды в базе</div><div class="num" id="sLeads">0</div><div class="foot">Все найденные возможности</div></div>
-<div class="stat"><div class="label">Высокий приоритет</div><div class="num" id="sHot">0</div><div class="foot">Оценка 75+ из 100</div></div>
-<div class="stat"><div class="label">Черновики</div><div class="num" id="sDrafts">0</div><div class="foot">Готовы к проверке</div></div>
-<div class="stat"><div class="label">Потенциальная выручка</div><div class="num" id="sRevenue">₽0</div><div class="foot">Оценка, не обещание дохода</div></div>
-</section>
-<div class="layout"><nav class="nav">
-<div class="navlabel">Рабочее место</div>
-<button class="active" data-view="overview">▦ Обзор</button><button data-view="leads">◎ Лиды и возможности</button><button data-view="monitor">◉ Мониторинг источников</button><button data-view="campaigns">✉ Сообщения и продажи</button><button data-view="analytics">▤ Аналитика</button><button data-view="settings">⚙ Настройки ИИ</button>
-<div class="navlabel">Инструменты</div><button data-view="import">⇧ Импорт / экспорт</button>
-</nav><main class="main">
-<section class="view active" id="view-overview">
-<div class="head"><div><h2>Панель управления</h2><p>Главное — находить сигнал к покупке, а не просто собирать контакты.</p></div><button class="primary" id="dailyBtn">Запустить анализ базы</button></div>
-<div class="grid2">
-<div class="card"><h3>Рабочий цикл</h3><p class="small">1. Найти публичный сигнал → 2. Проверить компанию → 3. Оценить соответствие → 4. Подготовить персональное предложение → 5. Проверить и отправить вручную → 6. Зафиксировать результат.</p><div class="bar"><span id="progressBar" style="width:10%"></span></div><div class="small" id="progressText">Добавьте лиды, чтобы начать.</div></div>
-<div class="card"><h3>Автопилот без самообмана</h3><p class="small">Включение источника здесь сохраняет конфигурацию, но не запускает облачный мониторинг. Для работы 24/7 нужен серверный процесс, расписание и доступ к API источников.</p><button data-goto="monitor">Настроить источники</button></div>
-<div class="card"><h3>Следующее лучшее действие</h3><div id="nextAction" class="leadnote">Добавьте первого потенциального клиента или импортируйте CSV.</div><button class="primary" data-goto="leads">Открыть лиды</button></div>
-<div class="card"><h3>Принцип качества</h3><p class="small">Никаких выдуманных фактов, массового спама или автоматических обещаний. Сначала конкретная польза, затем короткий контакт и контроль ответа.</p></div>
-</div><div class="card" style="margin-top:12px"><h3>Последние события</h3><div id="events" class="small">Событий пока нет.</div></div>
-</section>
-<section class="view" id="view-leads"><div class="head"><div><h2>Лиды и возможности</h2><p>Приоритет, доказательство сигнала, следующий шаг и черновик в одном месте.</p></div><div class="row"><button id="sampleBtn">Загрузить демо</button><button class="primary" id="addBtn2">+ Добавить лид</button></div></div>
-<div class="filters"><input id="searchLeads" placeholder="Поиск по компании, нише, сигналу…"><select id="filterStatus"><option value="">Все статусы</option><option>Новый</option><option>Исследован</option><option>Черновик готов</option><option>Отправлено</option><option>Ответили</option><option>Встреча</option><option>Клиент</option><option>Не подходит</option></select><select id="sortLeads"><option value="score">Сначала приоритет</option><option value="newest">Сначала новые</option><option value="name">По названию</option></select></div>
-<div class="list" id="leadList"></div></section>
-<section class="view" id="view-monitor"><div class="head"><div><h2>Мониторинг источников</h2><p>Источники, где могут появляться свежие сигналы спроса.</p></div></div>
-<div class="notice">Источники нельзя «магически» мониторить одной HTML-страницей. Для каждого нужна официальная API/RSS/разрешённая интеграция и серверный опрос. Не добавляйте источники, запрещающие автоматический сбор.</div>
-<div class="card"><h3>Добавить RSS-источник</h3><div class="field"><label>Название источника</label><input id="srcName" placeholder="Например, новости отрасли"></div><div class="field"><label>RSS URL</label><input id="srcUrl" placeholder="https://example.com/feed.xml"></div><div class="field"><label>Что искать в публикациях</label><input id="srcKeywords" placeholder="ищу подрядчика, открытие, новый объект, тендер"></div><button class="primary" id="addSource">Сохранить источник</button><p class="footnote">В этой версии сохраняется настройка источника. Реальный опрос RSS выполняет серверный модуль из комплекта, после его развёртывания.</p></div>
-<div class="card" style="margin-top:12px"><h3>Подключённые источники</h3><div id="sourceList"></div></div>
-<div class="card" style="margin-top:12px"><h3>Идеи источников по сигналам</h3><div class="grid2"><div><b>Свежий спрос</b><p class="small">Публичные тендеры, RSS-ленты, открытые доски объявлений с разрешённым доступом, страницы «ищем подрядчика».</p></div><div><b>Триггеры бизнеса</b><p class="small">Новый филиал, вакансия продаж/маркетинга, запуск продукта, новый объект, обновление сайта.</p></div><div><b>Партнёрские сигналы</b><p class="small">Агентства и интеграторы, которым можно предложить white-label решение.</p></div><div><b>Входящие</b><p class="small">Форма на сайте, отдельный рабочий почтовый ящик или CRM webhook — после безопасной интеграции.</p></div></div></div></section>
-<section class="view" id="view-campaigns"><div class="head"><div><h2>Сообщения и продажи</h2><p>Черновики для проверки человеком. Автоматическая отправка отключена намеренно.</p></div></div><div class="grid2"><div class="card"><h3>Очередь черновиков</h3><div id="draftQueue"></div></div><div class="card"><h3>Короткая последовательность</h3><ol class="small"><li>Первое сообщение: конкретная причина контакта и маленькая польза.</li><li>Через 3–5 рабочих дней — одно вежливое напоминание, если канал и правила это допускают.</li><li>Нет ответа — остановить цепочку и не давить.</li><li>Любой отказ — отметить и больше не писать.</li></ol><p class="footnote">Перед отправкой проверь факты, уместность канала, согласие и местные правила рассылок.</p></div></div></section>
-<section class="view" id="view-analytics"><div class="head"><div><h2>Аналитика</h2><p>Считаем воронку, а не vanity-метрики.</p></div><button id="exportAnalytics">Экспорт отчёта</button></div><div class="grid3" id="funnelStats"></div><div class="card" style="margin-top:12px"><h3>Разрез по нишам</h3><div id="nicheStats"></div></div><div class="card" style="margin-top:12px"><h3>Как оценивать результат</h3><p class="small">Сравнивай долю ответов, встреч, платных пилотов и доход на 10 качественных контактов. Не оптимизируйся под количество отправок. До появления хотя бы 30–50 проверенных контактов выводы будут предварительными.</p></div></section>
-<section class="view" id="view-settings"><div class="head"><div><h2>Настройки ИИ и стратегии</h2><p>Секреты должны храниться на сервере, а не в опубликованной странице.</p></div></div>
-<div class="notice">Безопасная схема: интерфейс → твой backend → API модели и источников. Не вставляй секретный API-ключ в публичный HTML или общую ссылку Netlify.</div>
-<div class="card"><h3>Подключение backend</h3><div class="field"><label>URL API твоего сервера</label><input id="apiBase" placeholder="https://твой-сервер.example.com/api"></div><button class="primary" id="saveSettings">Сохранить адрес</button> <button id="testBackend">Проверить соединение</button><p class="small" id="apiStatus">Сервер не проверен.</p></div>
-<div class="card" style="margin-top:12px"><h3>Твоя услуга</h3><div class="field"><label>Что продаём</label><input id="offer" placeholder="Например: AI-предпросмотр интерьера для дизайн-студий"></div><div class="field"><label>Кому продаём</label><input id="target" placeholder="Например: студии дизайна интерьера, 2–30 сотрудников"></div><div class="field"><label>Польза для клиента</label><textarea id="benefit" placeholder="Что улучшится? Как проверим эффект?"></textarea></div><div class="field"><label>Цель пилота</label><input id="pilot" placeholder="Например: 3 демонстрации, 1 платный пилот"></div><div class="field"><label>Минимальная цена пилота, ₽</label><input id="price" type="number" min="0" placeholder="15000"></div><button class="primary" id="saveOffer">Сохранить стратегию</button></div>
-<div class="card" style="margin-top:12px"><h3>Какой должна быть оценка лида</h3><p class="small">Совпадение с целевой аудиторией (0–30), свежий сигнал потребности (0–25), доступность подходящего канала (0–15), соответствие предложению (0–20), качество подтверждений (0–10). Это эвристика, не гарантия конверсии.</p></div></section>
-<section class="view" id="view-import"><div class="head"><div><h2>Импорт и экспорт</h2><p>Перенос базы и резервная копия.</p></div></div><div class="card"><h3>Импорт CSV</h3><p class="small">Поддерживаются поля company, niche, city, website, contact, note; дополнительно — signal, source, score, status, value.</p><input type="file" id="csvFile" accept=".csv,text/csv"><div style="margin-top:10px" class="row"><button class="primary" id="importCsv">Импортировать</button><button id="downloadTemplate">Скачать шаблон CSV</button></div><p class="small" id="importStatus"></p></div><div class="card" style="margin-top:12px"><h3>Резервная копия</h3><p class="small">Экспортируй CSV для таблиц или JSON для полного восстановления базы, настроек и черновиков.</p><div class="row"><button id="exportJson">Экспорт JSON</button><button id="exportCsv">Экспорт CSV</button><button class="danger" id="clearData">Удалить все локальные данные</button></div></div></section>
-</main></div><p class="footnote">LeadPilot Pro — прототип. Данные хранятся локально в браузере этого устройства. Для надёжной работы на нескольких устройствах нужен backend и база данных.</p>
-</div><div class="toast" id="toast"></div>
-<dialog id="leadDialog"><div class="modalhead"><h3 id="dialogTitle">Добавить лид</h3><button class="close" id="closeDialog">✕</button></div><form id="leadForm"><input type="hidden" id="leadId"><div class="grid2"><div class="field"><label>Компания *</label><input id="company" required></div><div class="field"><label>Ниша</label><input id="niche" placeholder="Дизайн интерьера"></div><div class="field"><label>Город</label><input id="city"></div><div class="field"><label>Сайт / страница</label><input id="website" type="url" placeholder="https://…"></div><div class="field"><label>Публичный деловой контакт</label><input id="contact"></div><div class="field"><label>Источник сигнала</label><input id="source" placeholder="Ссылка / RSS / рекомендация"></div><div class="field"><label>Оценка приоритета (0–100)</label><input id="score" type="number" min="0" max="100" value="50"></div><div class="field"><label>Ожидаемая стоимость пилота, ₽</label><input id="value" type="number" min="0" value="15000"></div></div><div class="field"><label>Что заметили / сигнал спроса *</label><textarea id="signal" required placeholder="Только проверяемый факт: например, компания публично ищет подрядчика…"></textarea></div><div class="field"><label>Комментарий / доказательство</label><textarea id="note" placeholder="Цитата, дата публикации, ссылка на источник, возможная проблема"></textarea></div><div class="field"><label>Статус</label><select id="status"><option>Новый</option><option>Исследован</option><option>Черновик готов</option><option>Отправлено</option><option>Ответили</option><option>Встреча</option><option>Клиент</option><option>Не подходит</option></select></div><button class="primary" type="submit">Сохранить лид</button></form></dialog>
-<dialog id="draftDialog"><div class="modalhead"><h3>Персональный черновик</h3><button class="close" id="closeDraft">✕</button></div><div id="draftContext" class="small"></div><div class="field" style="margin-top:12px"><label>Текст сообщения</label><textarea id="draftText" style="min-height:230px"></textarea></div><div class="row"><button class="primary" id="copyDraft">Копировать текст</button><button id="saveDraft">Сохранить черновик</button><button id="regenerateDraft">Сгенерировать заново</button></div><p class="footnote">Если серверный ИИ не подключён, приложение предложит качественный локальный черновик на основе введённых фактов — это не результат модели.</p></dialog>
+:root {
+  --bg: #080b12;
+  --panel: #101622;
+  --panel2: #151d2c;
+  --border: #273247;
+  --text: #f1f5ff;
+  --muted: #929eb3;
+  --accent: #8b7cff;
+  --accent2: #5de1c2;
+  --danger: #ff7185;
+  --radius: 18px;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--text);
+  background:
+    radial-gradient(ellipse at 15% 0%, rgba(95,84,255,.16), transparent 38%),
+    radial-gradient(ellipse at 100% 30%, rgba(32,198,169,.08), transparent 35%),
+    var(--bg);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+button, input, textarea, select { font: inherit; }
+button { cursor: pointer; }
+button:disabled { opacity: .55; cursor: not-allowed; }
+button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible {
+  outline: 2px solid var(--accent2);
+  outline-offset: 2px;
+}
+.app { width: min(1440px, 100%); margin: auto; padding: 24px; }
+.topbar {
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 18px; margin-bottom: 30px;
+}
+.brand { display: flex; align-items: center; gap: 13px; min-width: 0; }
+.logo {
+  width: 48px; height: 48px; border-radius: 15px;
+  display: grid; place-items: center; flex-shrink: 0;
+  font-weight: 900; font-size: 21px; color: white;
+  background: linear-gradient(135deg, #9a7cff, #4b48cf);
+  box-shadow: 0 8px 30px #7564ff35;
+}
+.brand h1 { font-size: 20px; margin: 0; letter-spacing: -.6px; }
+.brand p { margin: 5px 0 0; color: var(--muted); font-size: 12px; }
+.top-actions { display: flex; align-items: center; gap: 10px; }
+.status {
+  display: inline-flex; align-items: center; gap: 8px;
+  color: var(--muted); background: #111827;
+  border: 1px solid var(--border); border-radius: 999px;
+  padding: 10px 13px; font-size: 12px; white-space: nowrap;
+}
+.dot { width: 8px; height: 8px; border-radius: 50%; background: #788397; }
+.status.online .dot { background: var(--accent2); box-shadow: 0 0 10px #5de1c2; }
+.status.offline .dot { background: var(--danger); }
+.btn {
+  border: 1px solid var(--border); background: var(--panel2);
+  color: var(--text); border-radius: 12px; padding: 11px 15px;
+  transition: .18s ease; font-weight: 650; font-size: 13px;
+}
+.btn:hover { border-color: #65739a; transform: translateY(-1px); }
+.btn-primary {
+  border: none; color: #fff;
+  background: linear-gradient(135deg, #8b7cff, #6554e8);
+  box-shadow: 0 8px 24px #6e5aff2c;
+}
+.btn-primary:hover { filter: brightness(1.1); }
+.btn-success { border-color: #245c54; color: var(--accent2); }
+.btn-danger { color: var(--danger); }
+.hero { margin: 28px 0 24px; }
+.eyebrow {
+  display: inline-flex; gap: 8px; align-items: center;
+  color: var(--accent2); font-size: 11px; font-weight: 800;
+  letter-spacing: 1.8px; text-transform: uppercase;
+}
+.hero h2 {
+  font-size: clamp(29px, 5vw, 46px); line-height: 1.08;
+  letter-spacing: -1.7px; margin: 15px 0 12px; max-width: 780px;
+}
+.gradient-text {
+  background: linear-gradient(90deg, #a99aff, #64e6c6);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.hero p { color: var(--muted); max-width: 680px; line-height: 1.7; margin: 0; font-size: 14px; }
+.stats {
+  display: grid; grid-template-columns: repeat(4, minmax(0,1fr));
+  gap: 14px; margin: 24px 0;
+}
+.stat, .card {
+  border: 1px solid var(--border);
+  background: linear-gradient(145deg, #111826f5, #0d121df5);
+  border-radius: var(--radius);
+}
+.stat { padding: 18px; min-width: 0; }
+.stat-label { color: var(--muted); font-size: 12px; }
+.stat-value { font-size: 27px; font-weight: 800; margin: 12px 0 5px; letter-spacing: -.8px; }
+.stat-foot { color: #8b97ad; font-size: 11px; }
+.layout {
+  display: grid; grid-template-columns: minmax(0,1.1fr) minmax(0,.9fr);
+  gap: 18px; align-items: start;
+}
+.card { padding: 23px; min-width: 0; }
+.card-head {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  gap: 12px; margin-bottom: 22px;
+}
+.card-head h3 { margin: 0; font-size: 18px; letter-spacing: -.3px; }
+.card-head p { color: var(--muted); font-size: 12px; line-height: 1.6; margin: 7px 0 0; }
+.step {
+  width: 32px; height: 32px; border-radius: 11px; display: grid; place-items: center;
+  background: #272342; color: #b7aaff; font-size: 13px; font-weight: 800; flex-shrink: 0;
+}
+.field { margin-bottom: 17px; }
+.field label {
+  display: block; margin-bottom: 8px; color: #d9e0f1;
+  font-size: 12px; font-weight: 700;
+}
+.field small { display: block; margin-top: 6px; color: var(--muted); font-size: 11px; line-height: 1.5; }
+input, textarea, select {
+  width: 100%; border: 1px solid #2b3549; border-radius: 11px;
+  background: #0a0f19; color: var(--text); padding: 13px 14px;
+  outline: none; transition: border .15s; font-size: 13px;
+}
+input:focus, textarea:focus, select:focus { border-color: var(--accent); }
+input::placeholder, textarea::placeholder { color: #68758b; }
+textarea { resize: vertical; min-height: 100px; line-height: 1.6; }
+select { appearance: auto; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 13px; }
+.preset-row { display: flex; gap: 8px; flex-wrap: wrap; margin: 0 0 17px; }
+.preset {
+  border: 1px solid var(--border); border-radius: 999px; padding: 8px 11px;
+  background: #111827; color: #c7d0e4; font-size: 11px;
+}
+.preset:hover, .preset.active { border-color: var(--accent); color: #c4baff; background: #211d3b; }
+.full { width: 100%; }
+.generate-btn { padding: 15px; font-size: 14px; margin-top: 4px; }
+.notice {
+  display: none; border-radius: 11px; padding: 12px 14px;
+  margin-top: 14px; font-size: 12px; line-height: 1.6; white-space: pre-wrap;
+}
+.notice.show { display: block; }
+.notice.error { color: #ffadb8; background: #381923; border: 1px solid #65303c; }
+.notice.success { color: #9ef4dc; background: #102c29; border: 1px solid #24574f; }
+.notice.info { color: #c8c0ff; background: #211d3c; border: 1px solid #3e366a; }
+.output-card { margin-top: 18px; }
+.output-top {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; margin-bottom: 16px;
+}
+.output-top h3 { margin: 0; font-size: 17px; }
+.output-badge {
+  font-size: 10px; color: var(--accent2); background: #122b29;
+  border: 1px solid #24534c; border-radius: 999px; padding: 6px 9px;
+}
+.output {
+  min-height: 220px; border: 1px solid #293449; border-radius: 13px;
+  background: #090e17; padding: 18px; white-space: pre-wrap;
+  line-height: 1.8; font-size: 14px; overflow-wrap: anywhere;
+}
+.output.empty { display: grid; place-items: center; text-align: center; color: #748097; }
+.empty-inner { max-width: 260px; }
+.empty-icon { font-size: 28px; margin-bottom: 12px; }
+.empty-inner p { font-size: 12px; line-height: 1.7; }
+.output-actions { display: flex; gap: 9px; flex-wrap: wrap; margin-top: 12px; }
+.section-title {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; margin: 28px 0 14px;
+}
+.section-title h3 { margin: 0; font-size: 17px; }
+.section-title span { color: var(--muted); font-size: 11px; }
+.history-list { display: grid; gap: 10px; }
+.history-item {
+  display: flex; justify-content: space-between; align-items: flex-start; gap: 12px;
+  background: #0c121e; border: 1px solid var(--border); border-radius: 13px; padding: 14px;
+}
+.history-main { min-width: 0; flex: 1; cursor: pointer; }
+.history-main strong { display: block; font-size: 12px; margin-bottom: 6px; }
+.history-main p {
+  color: var(--muted); font-size: 11px; line-height: 1.6; margin: 0;
+  overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+}
+.history-date { color: #7e8aa0; font-size: 10px; margin-top: 8px; }
+.history-buttons { display: flex; gap: 5px; flex-shrink: 0; }
+.icon-btn {
+  width: 32px; height: 32px; border-radius: 9px; border: 1px solid var(--border);
+  background: #141c2b; color: #cbd4e8;
+}
+.icon-btn:hover { border-color: var(--accent); }
+.empty-history { padding: 25px; text-align: center; color: var(--muted); font-size: 12px; border: 1px dashed var(--border); border-radius: 12px; }
+.settings-panel {
+  display: none; margin-top: 18px; padding: 20px;
+  border: 1px solid var(--border); border-radius: var(--radius); background: var(--panel);
+}
+.settings-panel.open { display: block; }
+.settings-panel h3 { margin: 0 0 16px; font-size: 16px; }
+.footer {
+  text-align: center; padding: 28px 0 12px; color: #68758b; font-size: 11px; line-height: 1.8;
+}
+.loader {
+  width: 16px; height: 16px; display: inline-block; vertical-align: middle;
+  border: 2px solid #ffffff55; border-top-color: white; border-radius: 50%;
+  animation: spin .7s linear infinite; margin-right: 8px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (max-width: 900px) {
+  .layout { grid-template-columns: 1fr; }
+  .stats { grid-template-columns: repeat(2,minmax(0,1fr)); }
+}
+@media (max-width: 560px) {
+  .app { padding: 15px; }
+  .topbar { align-items: flex-start; }
+  .brand h1 { font-size: 17px; }
+  .brand p { font-size: 10px; }
+  .logo { width: 42px; height: 42px; }
+  .top-actions { flex-direction: column; align-items: stretch; }
+  .top-actions .btn { padding: 9px 10px; }
+  .status { padding: 8px 10px; font-size: 10px; }
+  .hero { margin-top: 24px; }
+  .hero h2 { letter-spacing: -1px; }
+  .stats { gap: 9px; }
+  .stat { padding: 13px; }
+  .stat-value { font-size: 23px; }
+  .card { padding: 17px; }
+  .grid2 { grid-template-columns: 1fr; gap: 0; }
+  .history-item { padding: 11px; }
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">LP</div>
+      <div>
+        <h1>LeadPilot <span class="gradient-text">Pro</span></h1>
+        <p>AI SALES WORKSPACE · VERSION 2.0</p>
+      </div>
+    </div>
+    <div class="top-actions">
+      <div class="status" id="connectionStatus">
+        <span class="dot"></span><span id="connectionText">Проверяем сервер…</span>
+      </div>
+      <button class="btn" id="settingsToggle" type="button">⚙ Настройки</button>
+    </div>
+  </header>
+  <section class="hero">
+    <div class="eyebrow">✦ AI-ассистент продаж</div>
+    <h2>Превращай холодные контакты<br>в <span class="gradient-text">реальные диалоги.</span></h2>
+    <p>Создавай персонализированные сообщения для потенциальных клиентов. Укажи контекст — ИИ подготовит сообщение, которое звучит по-человечески, а не как массовая рассылка.</p>
+  </section>
+  <section class="stats">
+    <div class="stat">
+      <div class="stat-label">Создано сообщений</div>
+      <div class="stat-value" id="statGenerated">0</div>
+      <div class="stat-foot">За всё время на этом устройстве</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">В истории</div>
+      <div class="stat-value" id="statHistory">0</div>
+      <div class="stat-foot">Сохранённых генераций</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Сервер</div>
+      <div class="stat-value" id="statServer">…</div>
+      <div class="stat-foot">Подключение к backend</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">AI</div>
+      <div class="stat-value" id="statAI">…</div>
+      <div class="stat-foot">Настройка на сервере</div>
+    </div>
+  </section>
+  <main class="layout">
+    <section class="card">
+      <div class="card-head">
+        <div>
+          <h3>Создание сообщения</h3>
+          <p>Расскажи ИИ, кому и что мы предлагаем.</p>
+        </div>
+        <div class="step">01</div>
+      </div>
+      <div class="field">
+        <label for="company">Компания или имя контакта</label>
+        <input id="company" placeholder="Например, ARH STUDIO" autocomplete="organization">
+      </div>
+      <div class="grid2">
+        <div class="field">
+          <label for="niche">Сфера бизнеса</label>
+          <input id="niche" placeholder="Дизайн интерьера">
+        </div>
+        <div class="field">
+          <label for="channel">Канал связи</label>
+          <select id="channel">
+            <option value="Telegram">Telegram</option>
+            <option value="ВКонтакте">ВКонтакте</option>
+            <option value="WhatsApp">WhatsApp</option>
+            <option value="Instagram Direct">Instagram Direct</option>
+            <option value="Электронная почта">Электронная почта</option>
+            <option value="Avito">Avito</option>
+            <option value="Другое">Другой канал</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label for="offer">Что мы предлагаем?</label>
+        <textarea id="offer" placeholder="Например: AI-автоматизация обработки заявок, квалификация клиентов и ответы на типовые вопросы."></textarea>
+        <small>Чем конкретнее предложение, тем полезнее будет результат.</small>
+      </div>
+      <div class="field">
+        <label for="signal">Что известно о клиенте?</label>
+        <textarea id="signal" placeholder="Например: публикует проекты, принимает заявки в Telegram, отвечает вручную. Если ничего не знаешь — оставь поле пустым." style="min-height:85px"></textarea>
+      </div>
+      <div class="grid2">
+        <div class="field">
+          <label for="goal">Цель сообщения</label>
+          <select id="goal">
+            <option value="Начать диалог">Начать диалог</option>
+            <option value="Предложить короткую демонстрацию">Предложить демо</option>
+            <option value="Получить ответ на вопрос">Получить ответ</option>
+            <option value="Назначить созвон">Назначить созвон</option>
+            <option value="Вернуться к старому контакту">Вернуться к контакту</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="tone">Стиль сообщения</label>
+          <select id="tone">
+            <option value="Дружелюбный и естественный">Дружелюбный</option>
+            <option value="Уверенный и деловой">Деловой</option>
+            <option value="Короткий, прямой, без воды">Короткий и прямой</option>
+            <option value="Неформальный и живой">Неформальный</option>
+            <option value="Экспертный и спокойный">Экспертный</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label>Быстрые сценарии</label>
+        <div class="preset-row">
+          <button class="preset" type="button" data-preset="automation">AI-автоматизация</button>
+          <button class="preset" type="button" data-preset="content">Контент и заявки</button>
+          <button class="preset" type="button" data-preset="website">Сайт и продажи</button>
+          <button class="preset" type="button" data-preset="followup">Повторный контакт</button>
+        </div>
+      </div>
+      <button class="btn btn-primary full generate-btn" id="generateBtn" type="button">
+        ✦ Создать персональное сообщение
+      </button>
+      <div class="notice" id="formNotice" role="status" aria-live="polite"></div>
+    </section>
+    <div>
+      <section class="card">
+        <div class="card-head">
+          <div>
+            <h3>Результат ИИ</h3>
+            <p>Готовый текст для отправки клиенту.</p>
+          </div>
+          <div class="step">02</div>
+        </div>
+        <div class="output empty" id="output" aria-live="polite">
+          <div class="empty-inner">
+            <div class="empty-icon">✧</div>
+            <strong>Здесь появится сообщение</strong>
+            <p>Заполни предложение и нажми кнопку генерации. Ответ придёт от ИИ через твой backend.</p>
+          </div>
+        </div>
+        <div class="output-actions">
+          <button class="btn btn-primary" id="copyBtn" type="button" disabled>⧉ Копировать</button>
+          <button class="btn" id="regenerateBtn" type="button" disabled>↻ Перегенерировать</button>
+          <button class="btn" id="clearOutputBtn" type="button">Очистить</button>
+        </div>
+        <div class="notice" id="outputNotice" role="status" aria-live="polite"></div>
+      </section>
+      <div class="section-title">
+        <h3>История генераций</h3>
+        <span id="historyCount">0 записей</span>
+      </div>
+      <section class="history-list" id="historyList">
+        <div class="empty-history">Здесь будут сохранены созданные сообщения.</div>
+      </section>
+      <div style="margin-top:12px;display:flex;justify-content:flex-end">
+        <button class="btn btn-danger" id="clearHistoryBtn" type="button">Очистить историю</button>
+      </div>
+    </div>
+  </main>
+  <section class="settings-panel" id="settingsPanel">
+    <h3>Настройки приложения</h3>
+    <div class="field">
+      <label for="apiBase">Адрес backend-сервера</label>
+      <input id="apiBase" type="url" placeholder="https://leadpilot-pro.onrender.com">
+      <small>Обычно менять не нужно. Вводи только адрес сервера, без /api/health в конце.</small>
+    </div>
+    <div class="field">
+      <label for="defaultOffer">Предложение по умолчанию</label>
+      <textarea id="defaultOffer" placeholder="Опиши свой продукт или услугу"></textarea>
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <button class="btn btn-primary" id="saveSettingsBtn" type="button">Сохранить настройки</button>
+      <button class="btn" id="testConnectionBtn" type="button">Проверить сервер</button>
+      <button class="btn" id="resetSettingsBtn" type="button">Сбросить настройки</button>
+    </div>
+    <div class="notice" id="settingsNotice" role="status" aria-live="polite"></div>
+  </section>
+  <footer class="footer">
+    LeadPilot Pro · AI Sales Workspace<br>
+    Сообщения генерируются сервером с использованием настроенной модели ИИ.<br>
+    Перед отправкой проверяй факты и персональные данные.
+  </footer>
+</div>
 <script>
-const $=id=>document.getElementById(id);
-const KEY='leadpilot_pro_v1';
-let db={leads:[],sources:[],events:[],settings:{apiBase:'',offer:'AI-предпросмотр интерьера и автоматизация первичной продажи',target:'Студии дизайна интерьера и сервисные компании',benefit:'Помочь клиенту быстрее понять идею услуги и снизить барьер к первому разговору. Эффект проверять на небольшом пилоте.',pilot:'Проверить интерес на 3–5 демонстрациях',price:15000}};
-let currentDraftId=null;
-function load(){try{const x=JSON.parse(localStorage.getItem(KEY)||'null');if(x)db={...db,...x,settings:{...db.settings,...x.settings}}}catch(e){}}
-function save(){localStorage.setItem(KEY,JSON.stringify(db));renderAll()}
-function toast(s){$('toast').textContent=s;$('toast').style.display='block';setTimeout(()=>$('toast').style.display='none',2600)}
-function log(s){db.events.unshift({text:s,at:new Date().toLocaleString('ru-RU')});db.events=db.events.slice(0,15);save()}
-function id(){return crypto.randomUUID?crypto.randomUUID():String(Date.now()+Math.random())}
-function norm(s){return String(s||'').trim().toLowerCase().replace(/^https?:\/\//,'').replace(/\/$/,'')}
-function duplicate(x,ignore){return db.leads.some(l=>l.id!==ignore&&((x.website&&l.website&&norm(x.website)===norm(l.website))||norm(x.company)===norm(l.company)))}
-function escapeHtml(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-function scoreColor(n){return n>=75?'var(--green)':n>=50?'var(--yellow)':'var(--muted)'}
-function money(n){return new Intl.NumberFormat('ru-RU',{style:'currency',currency:'RUB',maximumFractionDigits:0}).format(Number(n)||0)}
-function nav(view){document.querySelectorAll('.nav button[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view===view));document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active',v.id==='view-'+view));if(view==='campaigns')renderDrafts()}
-document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>nav(b.dataset.view)));
-document.querySelectorAll('[data-goto]').forEach(b=>b.addEventListener('click',()=>nav(b.dataset.goto)));
-function renderAll(){renderStats();renderLeads();renderSources();renderAnalytics();renderEvents();renderSettings()}
-function renderStats(){$('sLeads').textContent=db.leads.length;$('sHot').textContent=db.leads.filter(l=>l.score>=75&&l.status!=='Не подходит').length;$('sDrafts').textContent=db.leads.filter(l=>l.draft).length;$('sRevenue').textContent=money(db.leads.filter(l=>l.status==='Клиент').reduce((s,l)=>s+(+l.value||0),0));let p=db.leads.length?Math.min(100,Math.round(db.leads.filter(l=>['Черновик готов','Отправлено','Ответили','Встреча','Клиент'].includes(l.status)).length/db.leads.length*100)):0;$('progressBar').style.width=p+'%';$('progressText').textContent=db.leads.length?`${p}% лидов дошли до стадии черновика или дальше.`:'Добавьте лиды, чтобы начать.';let next=db.leads.filter(l=>!['Не подходит','Клиент'].includes(l.status)).sort((a,b)=>b.score-a.score)[0];$('nextAction').textContent=next?`Следующий шаг: изучить «${next.company}» (приоритет ${next.score}/100), подтвердить сигнал и подготовить персональное сообщение.`:'Добавьте первого потенциального клиента или импортируйте CSV.'}
-function renderLeads(){let q=($('searchLeads')?.value||'').toLowerCase(),st=$('filterStatus')?.value||'',sort=$('sortLeads')?.value||'score';let a=db.leads.filter(l=>(!q||[l.company,l.niche,l.city,l.signal,l.note,l.contact].join(' ').toLowerCase().includes(q))&&(!st||l.status===st));a.sort(sort==='newest'?(x,y)=>y.created-x.created:sort==='name'?(x,y)=>x.company.localeCompare(y.company): (x,y)=>y.score-x.score);$('leadList').innerHTML=a.length?a.map(l=>`<article class="lead"><div class="leadtop"><div><h3>${escapeHtml(l.company)}</h3><div class="meta">${escapeHtml([l.niche,l.city,l.contact].filter(Boolean).join(' · '))}</div></div><div style="text-align:right"><div class="score" style="color:${scoreColor(l.score)}">${l.score}/100</div><span class="pill">${escapeHtml(l.status)}</span></div></div><div class="leadnote">${escapeHtml(l.signal||'Сигнал не описан')}</div><div class="small">Источник: ${l.source?`<a style="color:#c4bbff" href="${escapeHtml(l.source)}" target="_blank" rel="noopener">${escapeHtml(l.source)}</a>`:'не указан'} · Потенциал пилота: ${money(l.value)}</div>${l.draft?`<div class="draft">${escapeHtml(l.draft.slice(0,320))}${l.draft.length>320?'…':''}</div>`:''}<div class="actions"><button class="primary" data-act="draft" data-id="${l.id}">${l.draft?'Открыть черновик':'Создать предложение'}</button><button data-act="edit" data-id="${l.id}">Изменить</button><button data-act="status" data-id="${l.id}">Следующий статус</button><button class="danger" data-act="delete" data-id="${l.id}">Удалить</button></div></article>`).join(''):'<div class="empty">Ничего не найдено. Добавь лид или импортируй CSV.</div>'}
-function renderSources(){$('sourceList').innerHTML=db.sources.length?db.sources.map(s=>`<div class="source"><div><strong>${escapeHtml(s.name)}</strong><p>${escapeHtml(s.url)}</p><p>Ключевые слова: ${escapeHtml(s.keywords||'не заданы')}</p><p class="status">Настроен локально · серверный опрос не активен</p></div><button class="danger" data-del-source="${s.id}">Удалить</button></div>`).join(''):'<div class="empty">Источники пока не добавлены.</div>'}
-function renderEvents(){$('events').innerHTML=db.events.length?db.events.slice(0,6).map(e=>`<p>• ${escapeHtml(e.at)} — ${escapeHtml(e.text)}</p>`).join(''):'Событий пока нет.'}
-function renderAnalytics(){const statuses=['Новый','Исследован','Черновик готов','Отправлено','Ответили','Встреча','Клиент','Не подходит'];$('funnelStats').innerHTML=statuses.slice(0,6).map(s=>`<div class="stat"><div class="label">${s}</div><div class="num">${db.leads.filter(l=>l.status===s).length}</div><div class="foot">${db.leads.length?Math.round(db.leads.filter(l=>l.status===s).length/db.leads.length*100):0}% базы</div></div>`).join('');let groups={};db.leads.forEach(l=>{let n=l.niche||'Не указана';groups[n]??={count:0,clients:0,drafts:0};groups[n].count++;if(l.status==='Клиент')groups[n].clients++;if(l.draft)groups[n].drafts++});$('nicheStats').innerHTML=Object.keys(groups).length?`<div class="tablewrap"><table><thead><tr><th>Ниша</th><th>Лиды</th><th>Черновики</th><th>Клиенты</th></tr></thead><tbody>${Object.entries(groups).map(([n,g])=>`<tr><td>${escapeHtml(n)}</td><td>${g.count}</td><td>${g.drafts}</td><td>${g.clients}</td></tr>`).join('')}</tbody></table></div>`:'<div class="empty">Аналитика появится после добавления лидов.</div>'}
-function renderSettings(){$('apiBase').value=db.settings.apiBase||'';$('offer').value=db.settings.offer||'';$('target').value=db.settings.target||'';$('benefit').value=db.settings.benefit||'';$('pilot').value=db.settings.pilot||'';$('price').value=db.settings.price||0}
-function renderDrafts(){let a=db.leads.filter(l=>l.draft);$('draftQueue').innerHTML=a.length?a.map(l=>`<div class="source"><div><strong>${escapeHtml(l.company)}</strong><p>${escapeHtml(l.status)} · приоритет ${l.score}/100</p></div><button data-open-draft="${l.id}">Открыть</button></div>`).join(''):'<div class="empty">Черновиков пока нет. Создай предложение из карточки лида.</div>'}
-function openLead(l){$('dialogTitle').textContent=l?'Изменить лид':'Добавить лид';$('leadId').value=l?.id||'';['company','niche','city','website','contact','source','score','value','signal','note','status'].forEach(k=>$(k).value=l?.[k]??({score:50,value:db.settings.price,status:'Новый'}[k]??''));$('leadDialog').showModal()}
-function closeLead(){$('leadDialog').close()}
-$('addBtn').onclick=$('addBtn2').onclick=()=>openLead(null);$('closeDialog').onclick=closeLead;
-$('leadForm').onsubmit=e=>{e.preventDefault();let lid=$('leadId').value;let x={};['company','niche','city','website','contact','source','score','value','signal','note','status'].forEach(k=>x[k]=$(k).value.trim());x.score=Math.max(0,Math.min(100,+x.score||0));x.value=+x.value||0;let old=db.leads.find(l=>l.id===lid);if(duplicate(x,lid)){toast('Похоже, такая компания или сайт уже есть. Дубликат не добавлен.');return}if(old){Object.assign(old,x,{updated:Date.now()});}else{db.leads.unshift({...x,id:id(),created:Date.now()});}closeLead();log(old?'Обновлён лид: '+x.company:'Добавлен лид: '+x.company)}
-$('leadList').addEventListener('click',e=>{let b=e.target.closest('button[data-act]');if(!b)return;let l=db.leads.find(x=>x.id===b.dataset.id);if(!l)return;let act=b.dataset.act;if(act==='draft')openDraft(l);if(act==='edit')openLead(l);if(act==='delete'&&confirm('Удалить '+l.company+'?')){db.leads=db.leads.filter(x=>x.id!==l.id);log('Удалён лид: '+l.company)}if(act==='status'){let seq=['Новый','Исследован','Черновик готов','Отправлено','Ответили','Встреча','Клиент','Не подходит'];let i=seq.indexOf(l.status);l.status=seq[(i+1)%seq.length];log('Статус '+l.company+': '+l.status)}});
-$('searchLeads').oninput=renderLeads;$('filterStatus').onchange=renderLeads;$('sortLeads').onchange=renderLeads;
-$('addSource').onclick=()=>{let name=$('srcName').value.trim(),url=$('srcUrl').value.trim(),keywords=$('srcKeywords').value.trim();if(!name||!/^https?:\/\//i.test(url)){toast('Укажи название и полный URL источника.');return}if(db.sources.some(s=>norm(s.url)===norm(url))){toast('Этот источник уже добавлен.');return}db.sources.push({id:id(),name,url,keywords,created:Date.now()});$('srcName').value=$('srcUrl').value=$('srcKeywords').value='';log('Добавлен источник: '+name)};
-$('sourceList').addEventListener('click',e=>{let b=e.target.closest('[data-del-source]');if(b){db.sources=db.sources.filter(s=>s.id!==b.dataset.delSource);save()}});
-function localDraft(l){let greeting='Здравствуйте!';let context=l.signal?`Обратил внимание на ваш публичный сигнал: ${l.signal}`:`Изучаю компании в сфере «${l.niche||'вашей отрасли'}» и ищу подходящие задачи для небольшого пилота.`;let offer=db.settings.offer||'автоматизация с помощью ИИ';let benefit=db.settings.benefit||'проверить, может ли ИИ упростить один конкретный этап работы';return `${greeting}\n\n${context}\n\nЕсть идея: ${offer}. ${benefit}\n\nНе предлагаю сразу большой проект — можно проверить гипотезу на небольшом пилоте: ${db.settings.pilot||'на одном процессе'}.\n\nБыло бы уместно прислать короткую демонстрацию именно под вашу задачу? Если неактуально, больше беспокоить не буду.`}
-async function makeDraft(l){const base=(db.settings.apiBase||'').replace(/\/$/,'');if(base){try{const r=await fetch(base+'/draft',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({lead:l,offer:db.settings.offer,target:db.settings.target,benefit:db.settings.benefit,pilot:db.settings.pilot})});if(r.ok){let j=await r.json();if(j.draft)return j.draft;}else throw new Error('API '+r.status)}catch(e){toast('ИИ-сервер недоступен. Создаю локальный черновик.')}}return localDraft(l)}
-async function openDraft(l){currentDraftId=l.id;$('draftContext').textContent=`${l.company} · ${l.niche||'ниша не указана'} · оценка ${l.score}/100`;if(!l.draft){$('draftText').value='Готовлю черновик…';$('draftDialog').showModal();l.draft=await makeDraft(l);$('draftText').value=l.draft;l.status='Черновик готов';save()}else{$('draftText').value=l.draft;$('draftDialog').showModal()}}
-$('closeDraft').onclick=()=>$('draftDialog').close();$('copyDraft').onclick=async()=>{try{await navigator.clipboard.writeText($('draftText').value);toast('Текст скопирован. Проверь факты перед отправкой.')}catch(e){$('draftText').select();toast('Выдели текст и скопируй вручную.')}};$('saveDraft').onclick=()=>{let l=db.leads.find(x=>x.id===currentDraftId);if(l){l.draft=$('draftText').value;l.status='Черновик готов';log('Сохранён черновик для '+l.company);$('draftDialog').close()}};$('regenerateDraft').onclick=async()=>{let l=db.leads.find(x=>x.id===currentDraftId);if(!l)return;$('draftText').value=await makeDraft(l)};
-$('saveSettings').onclick=()=>{db.settings.apiBase=$('apiBase').value.trim().replace(/\/$/,'');save();toast('Адрес API сохранён.')};
-$('testBackend').onclick=async()=>{let base=$('apiBase').value.trim().replace(/\/$/,'');if(!base){$('apiStatus').textContent='Сначала укажи адрес своего backend.';return}try{let r=await fetch(base+'/health');let j=await r.json();$('apiStatus').textContent=r.ok?`Сервер доступен: ${j.status||'OK'}`:`Ответ сервера: ${r.status}`}catch(e){$('apiStatus').textContent='Не удалось подключиться. Проверь URL, HTTPS и настройки CORS.'}};
-$('saveOffer').onclick=()=>{Object.assign(db.settings,{offer:$('offer').value.trim(),target:$('target').value.trim(),benefit:$('benefit').value.trim(),pilot:$('pilot').value.trim(),price:+$('price').value||0});save();toast('Стратегия сохранена.')};
-$('dailyBtn').onclick=()=>{if(!db.leads.length){toast('Сначала добавь лиды или импортируй CSV.');return}db.leads.forEach(l=>{let penalty=l.status==='Не подходит'?100:0;let freshness=l.created&&Date.now()-l.created<7*864e5?5:0;l.score=Math.max(0,Math.min(100,(+l.score||0)+freshness-penalty))});db.leads.sort((a,b)=>b.score-a.score);log('Выполнена локальная приоритизация '+db.leads.length+' лидов');toast('Приоритеты пересчитаны. Это эвристика, не исследование интернета.');nav('leads')};
-$('sampleBtn').onclick=()=>{let demo=[{company:'Пример: интерьерная студия',niche:'Дизайн интерьера',city:'Москва',website:'',contact:'',source:'',score:78,value:15000,signal:'Публичные проекты студии можно использовать для демонстрации AI-предпросмотра; спрос ещё не подтверждён.',note:'Демо-запись. Не реальная компания и не проверенный сигнал.',status:'Исследован'},{company:'Пример: агентство недвижимости',niche:'Недвижимость',city:'Краснодар',website:'',contact:'',source:'',score:61,value:20000,signal:'Возможная гипотеза: визуализация пустого помещения может помочь в презентации объекта. Проверить на реальных данных.',note:'Демо-запись. Не реальная компания и не проверенный сигнал.',status:'Новый'}];let n=0;demo.forEach(x=>{if(!duplicate(x)){db.leads.push({...x,id:id(),created:Date.now()});n++}});log('Добавлено демо-лидов: '+n);toast('Демо добавлено. Это примеры, не настоящие лиды.')};
-function csvParse(text){let rows=[],row=[],v='',q=false;for(let i=0;i<text.length;i++){let c=text[i];if(c==='"'&&q&&text[i+1]==='"'){v+='"';i++}else if(c==='"')q=!q;else if(c===','&&!q){row.push(v);v=''}else if((c==='\n'||c==='\r')&&!q){if(c==='\r'&&text[i+1]==='\n')i++;row.push(v);if(row.some(z=>z.trim()))rows.push(row);row=[];v=''}else v+=c}row.push(v);if(row.some(z=>z.trim()))rows.push(row);if(!rows.length)return[];let heads=rows.shift().map(x=>x.trim().toLowerCase().replace(/^\uFEFF/,''));return rows.map(r=>Object.fromEntries(heads.map((h,i)=>[h,(r[i]||'').trim()])))}
-$('importCsv').onclick=async()=>{let f=$('csvFile').files[0];if(!f){$('importStatus').textContent='Выбери CSV-файл.';return}try{let rows=csvParse(await f.text()),n=0,dups=0;rows.forEach(r=>{let x={company:r.company||r.name||'',niche:r.niche||'',city:r.city||'',website:r.website||'',contact:r.contact||'',source:r.source||'',signal:r.signal||r.note||'',note:r.note||'',score:+r.score||50,value:+r.value||+db.settings.price||0,status:r.status||'Новый',id:id(),created:Date.now()};if(!x.company)return;if(duplicate(x)){dups++;return}db.leads.push(x);n++});log(`Импорт CSV: добавлено ${n}, дубликатов пропущено ${dups}`);$('importStatus').textContent=`Добавлено: ${n}. Пропущено дубликатов: ${dups}. Строк без названия: ${rows.filter(r=>!(r.company||r.name)).length}.`}catch(e){$('importStatus').textContent='Не удалось прочитать файл: '+e.message}};
-function download(name,content,type='text/plain;charset=utf-8'){let b=new Blob([content],{type}),u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(u),1000)}
-function csvEscape(s){s=String(s??'');return '"'+s.replace(/"/g,'""')+'"'}
-function csvOut(rows){let heads=['company','niche','city','website','contact','source','signal','note','score','value','status','draft'];return '\uFEFF'+[heads.join(','),...rows.map(r=>heads.map(h=>csvEscape(r[h])).join(','))].join('\r\n')}
-$('exportBtn').onclick=$('exportCsv').onclick=()=>download('leadpilot-leads.csv',csvOut(db.leads),'text/csv;charset=utf-8');$('exportJson').onclick=()=>download('leadpilot-backup.json',JSON.stringify(db,null,2),'application/json');$('downloadTemplate').onclick=()=>download('leadpilot-template.csv','company,niche,city,website,contact,source,signal,note,score,value,status\n','text/csv;charset=utf-8');$('exportAnalytics').onclick=()=>download('leadpilot-report.csv',csvOut(db.leads),'text/csv;charset=utf-8');
-$('clearData').onclick=()=>{if(confirm('Точно удалить всю базу и настройки с этого браузера? Сначала сделай экспорт.')){localStorage.removeItem(KEY);db={leads:[],sources:[],events:[],settings:{apiBase:'',offer:'AI-предпросмотр интерьера и автоматизация первичной продажи',target:'Студии дизайна интерьера и сервисные компании',benefit:'Помочь клиенту быстрее понять идею услуги и снизить барьер к первому разговору. Эффект проверять на небольшом пилоте.',pilot:'Проверить интерес на 3–5 демонстрациях',price:15000}};save();toast('Локальные данные удалены.')}}; 
-load();renderAll();
-</script></body></html>
+(() => {
+  'use strict';
+  const DEFAULT_API = 'https://leadpilot-pro.onrender.com';
+  const SETTINGS_KEY = 'leadpilot_pro_settings_v2';
+  const HISTORY_KEY = 'leadpilot_pro_history_v2';
+  const COUNT_KEY = 'leadpilot_pro_generated_v2';
+  const $ = (id) => document.getElementById(id);
+  let currentResult = '';
+  let isGenerating = false;
+  let lastRequest = null;
+  let history = readStorage(HISTORY_KEY, []);
+  let settings = readStorage(SETTINGS_KEY, {
+    apiBase: DEFAULT_API,
+    defaultOffer: ''
+  });
+  if (!Array.isArray(history)) history = [];
+  if (!settings || typeof settings !== 'object') {
+    settings = { apiBase: DEFAULT_API, defaultOffer: '' };
+  }
+  function readStorage(key, fallback) {
+    try {
+      const raw = localStorage.getItem(key);
+      return raw ? JSON.parse(raw) : fallback;
+    } catch {
+      return fallback;
+    }
+  }
+  function writeStorage(key, value) {
+    try {
+      localStorage.setItem(key, JSON.stringify(value));
+      return true;
+    } catch {
+      return false;
+    }
+  }
+  function getApiBase() {
+    const raw = ($('apiBase').value || settings.apiBase || DEFAULT_API).trim();
+    return raw.replace(/\/+$/, '').replace(/\/api$/, '');
+  }
+  function showNotice(id, message, type = 'info') {
+    const box = $(id);
+    box.textContent = message;
+    box.className = 'notice show ' + type;
+  }
+  function hideNotice(id) {
+    const box = $(id);
+    box.textContent = '';
+    box.className = 'notice';
+  }
+  async function requestJson(url, options = {}, timeout = 45000) {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), timeout);
+    try {
+      const response = await fetch(url, {
+        ...options,
+        signal: controller.signal,
+        headers: {
+          'Content-Type': 'application/json',
+          ...(options.headers || {})
+        }
+      });
+      const raw = await response.text();
+      let data = {};
+      try {
+        data = raw ? JSON.parse(raw) : {};
+      } catch {
+        throw new Error('Сервер вернул не JSON. Проверь адрес API и настройки backend.');
+      }
+      if (!response.ok) {
+        const message = data.error || data.message || `HTTP ${response.status}`;
+        const details = data.details ? '\n' + data.details : '';
+        throw new Error(message + details);
+      }
+      return data;
+    } catch (error) {
+      if (error.name === 'AbortError') {
+        throw new Error('Сервер слишком долго отвечает. Возможно, Render запускается после простоя. Попробуй ещё раз.');
+      }
+      if (error instanceof TypeError) {
+        throw new Error('Не удалось подключиться к серверу. Проверь интернет, адрес backend и настройки CORS в Render.');
+      }
+      throw error;
+    } finally {
+      clearTimeout(timer);
+    }
+  }
+  function setConnection(state, text) {
+    const status = $('connectionStatus');
+    status.classList.remove('online', 'offline');
+    if (state === 'online') status.classList.add('online');
+    if (state === 'offline') status.classList.add('offline');
+    $('connectionText').textContent = text;
+    $('statServer').textContent = state === 'online' ? 'OK' : state === 'offline' ? 'OFF' : '…';
+  }
+  async function checkBackend(showMessage = false) {
+    setConnection('checking', 'Проверяем сервер…');
+    if (showMessage) showNotice('settingsNotice', 'Проверяем соединение с backend…', 'info');
+    try {
+      const data = await requestJson(getApiBase() + '/api/health', { method: 'GET' }, 20000);
+      setConnection('online', 'Сервер работает');
+      $('statAI').textContent = data.aiConfigured ? 'ON' : 'OFF';
+      $('statAI').style.color = data.aiConfigured ? 'var(--accent2)' : 'var(--danger)';
+      if (showMessage) {
+        showNotice(
+          'settingsNotice',
+          data.aiConfigured
+            ? 'Соединение успешно. Сервер работает, ключ ИИ настроен.'
+            : 'Сервер доступен, но GEMINI_API_KEY не настроен в Render.',
+          data.aiConfigured ? 'success' : 'error'
+        );
+      }
+      return data;
+    } catch (error) {
+      setConnection('offline', 'Нет соединения');
+      $('statAI').textContent = '—';
+      if (showMessage) showNotice('settingsNotice', error.message, 'error');
+      return null;
+    }
+  }
+  function buildPrompt(values) {
+    return [
+      'Ты — опытный специалист по B2B-продажам и персонализированному первому контакту.',
+      'Создай ОДНО готовое сообщение потенциальному клиенту на русском языке.',
+      '',
+      'Компания или контакт: ' + (values.company || 'не указано'),
+      'Сфера: ' + (values.niche || 'не указана'),
+      'Канал: ' + values.channel,
+      'Предложение: ' + values.offer,
+      'Наблюдения о клиенте: ' + (values.signal || 'конкретные сведения не предоставлены'),
+      'Цель: ' + values.goal,
+      'Стиль: ' + values.tone,
+      '',
+      'Требования:',
+      '1. Сообщение должно быть естественным и персонализированным.',
+      '2. Не выдумывай факты о компании, её результатах, клиентах или проблемах.',
+      '3. Не обещай гарантированный рост продаж и не используй ложную срочность.',
+      '4. Не начинай с банального «Здравствуйте, предлагаем наши услуги» без контекста.',
+      '5. Не пиши, что ты ИИ.',
+      '6. Не добавляй комментарии, пояснения, заголовки или кавычки вокруг сообщения.',
+      '7. Сделай текст уместным для выбранного канала. Для мессенджера — коротко, для email — структурно.',
+      '8. В конце используй лёгкий вопрос или понятный следующий шаг.',
+      '9. Если данных мало, используй осторожную формулировку без выдуманных деталей.',
+      '10. Не создавай массовую рассылку и не используй агрессивное давление.',
+      '',
+      'Верни только готовый текст сообщения.'
+    ].join('\n');
+  }
+  function getFormValues() {
+    return {
+      company: $('company').value.trim(),
+      niche: $('niche').value.trim(),
+      channel: $('channel').value,
+      offer: $('offer').value.trim(),
+      signal: $('signal').value.trim(),
+      goal: $('goal').value,
+      tone: $('tone').value
+    };
+  }
+  function renderOutput(text) {
+    currentResult = text;
+    const output = $('output');
+    output.classList.remove('empty');
+    output.textContent = text;
+    $('copyBtn').disabled = !text;
+    $('regenerateBtn').disabled = !lastRequest || isGenerating;
+  }
+  function clearOutput() {
+    currentResult = '';
+    $('output').classList.add('empty');
+    $('output').innerHTML =
+      '<div class="empty-inner"><div class="empty-icon">✧</div><strong>Здесь появится сообщение</strong><p>Заполни предложение и нажми кнопку генерации. Ответ придёт от ИИ через твой backend.</p></div>';
+    $('copyBtn').disabled = true;
+    $('regenerateBtn').disabled = !lastRequest || isGenerating;
+    hideNotice('outputNotice');
+  }
+  function updateStats() {
+    const count = Number(readStorage(COUNT_KEY, 0)) || 0;
+    $('statGenerated').textContent = count.toLocaleString('ru-RU');
+    $('statHistory').textContent = history.length.toLocaleString('ru-RU');
+    $('historyCount').textContent = history.length + (history.length === 1 ? ' запись' : history.length >= 2 && history.length <= 4 ? ' записи' : ' записей');
+  }
+  function formatDate(value) {
+    try {
+      return new Date(value).toLocaleString('ru-RU', {
+        day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit'
+      });
+    } catch {
+      return '';
+    }
+  }
+  function renderHistory() {
+    const list = $('historyList');
+    list.innerHTML = '';
+    if (!history.length) {
+      const empty = document.createElement('div');
+      empty.className = 'empty-history';
+      empty.textContent = 'Здесь будут сохранены созданные сообщения.';
+      list.appendChild(empty);
+      updateStats();
+      return;
+    }
+    history.slice(0, 20).forEach((item) => {
+      const row = document.createElement('div');
+      row.className = 'history-item';
+      const main = document.createElement('div');
+      main.className = 'history-main';
+      main.tabIndex = 0;
+      main.setAttribute('role', 'button');
+      main.setAttribute('aria-label', 'Открыть сообщение из истории');
+      const title = document.createElement('strong');
+      title.textContent = item.company || item.niche || 'Сообщение без названия';
+      const preview = document.createElement('p');
+      preview.textContent = item.text || '';
+      const date = document.createElement('div');
+      date.className = 'history-date';
+      date.textContent = formatDate(item.createdAt);
+      main.append(title, preview, date);
+      const buttons = document.createElement('div');
+      buttons.className = 'history-buttons';
+      const copy = document.createElement('button');
+      copy.className = 'icon-btn';
+      copy.type = 'button';
+      copy.textContent = '⧉';
+      copy.title = 'Копировать';
+      copy.setAttribute('aria-label', 'Копировать сообщение');
+      copy.addEventListener('click', () => copyText(item.text));
+      const remove = document.createElement('button');
+      remove.className = 'icon-btn';
+      remove.type = 'button';
+      remove.textContent = '×';
+      remove.title = 'Удалить';
+      remove.setAttribute('aria-label', 'Удалить запись');
+      remove.addEventListener('click', () => {
+        history = history.filter((entry) => entry.id !== item.id);
+        writeStorage(HISTORY_KEY, history);
+        renderHistory();
+      });
+      main.addEventListener('click', () => {
+        renderOutput(item.text);
+        lastRequest = item.values || null;
+        $('regenerateBtn').disabled = !lastRequest;
+        $('output').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      });
+      main.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          main.click();
+        }
+      });
+      buttons.append(copy, remove);
+      row.append(main, buttons);
+      list.appendChild(row);
+    });
+    updateStats();
+  }
+  async function copyText(text) {
+    if (!text) return;
+    try {
+      await navigator.clipboard.writeText(text);
+      showNotice('outputNotice', 'Текст скопирован.', 'success');
+    } catch {
+      const area = document.createElement('textarea');
+      area.value = text;
+      area.style.position = 'fixed';
+      area.style.opacity = '0';
+      document.body.appendChild(area);
+      area.select();
+      let success = false;
+      try { success = document.execCommand('copy'); } catch {}
+      area.remove();
+      showNotice(
+        'outputNotice',
+        success ? 'Текст скопирован.' : 'Не удалось скопировать автоматически. Выдели и скопируй текст вручную.',
+        success ? 'success' : 'error'
+      );
+    }
+  }
+  async function generateMessage(values = getFormValues()) {
+    if (isGenerating) return;
+    if (!values.offer || !values.offer.trim()) {
+      showNotice('formNotice', 'Сначала напиши, что именно ты предлагаешь клиенту.', 'error');
+      $('offer').focus();
+      return;
+    }
+    lastRequest = { ...values };
+    isGenerating = true;
+    const button = $('generateBtn');
+    const originalText = '✦ Создать персональное сообщение';
+    button.disabled = true;
+    button.innerHTML = '<span class="loader"></span>ИИ создаёт сообщение…';
+    $('regenerateBtn').disabled = true;
+    hideNotice('formNotice');
+    hideNotice('outputNotice');
+    try {
+      const data = await requestJson(getApiBase() + '/api/generate', {
+        method: 'POST',
+        body: JSON.stringify({ prompt: buildPrompt(values) })
+      }, 60000);
+      const result = typeof data.result === 'string' ? data.result.trim() : '';
+      if (!result) {
+        throw new Error('Сервер ответил, но поле result пустое. Проверь формат ответа backend.');
+      }
+      renderOutput(result);
+      const item = {
+        id: Date.now().toString(36) + Math.random().toString(36).slice(2, 8),
+        company: values.company,
+        niche: values.niche,
+        text: result,
+        values: { ...values },
+        createdAt: new Date().toISOString()
+      };
+      history.unshift(item);
+      history = history.slice(0, 50);
+      writeStorage(HISTORY_KEY, history);
+      const count = (Number(readStorage(COUNT_KEY, 0)) || 0) + 1;
+      try { localStorage.setItem(COUNT_KEY, String(count)); } catch {}
+      renderHistory();
+      showNotice('formNotice', 'Сообщение создано и сохранено в истории.', 'success');
+      showNotice('outputNotice', 'Готово. Проверь текст перед отправкой клиенту.', 'success');
+    } catch (error) {
+      showNotice('formNotice', error.message || 'Неизвестная ошибка генерации.', 'error');
+      showNotice('outputNotice', 'Генерация не удалась. Текст не был подменён шаблоном.', 'error');
+    } finally {
+      isGenerating = false;
+      button.disabled = false;
+      button.textContent = originalText;
+      $('regenerateBtn').disabled = !lastRequest || !currentResult;
+    }
+  }
+  const presets = {
+    automation: {
+      offer: 'AI-автоматизация обработки входящих заявок, первичная квалификация потенциальных клиентов и помощь с ответами на типовые вопросы.',
+      goal: 'Начать диалог',
+      tone: 'Дружелюбный и естественный'
+    },
+    content: {
+      offer: 'Помогаю превращать экспертный контент в обращения потенциальных клиентов с помощью AI-инструментов и продуманной структуры публикаций.',
+      goal: 'Предложить короткую демонстрацию',
+      tone: 'Уверенный и деловой'
+    },
+    website: {
+      offer: 'Создание понятной посадочной страницы с описанием услуг, преимуществ и простым способом оставить заявку.',
+      goal: 'Предложить короткую демонстрацию',
+      tone: 'Короткий, прямой, без воды'
+    },
+    followup: {
+      offer: 'Хочу аккуратно возобновить диалог и понять, актуальна ли тема автоматизации или улучшения обработки заявок.',
+      goal: 'Вернуться к старому контакту',
+      tone: 'Неформальный и живой'
+    }
+  };
+  document.querySelectorAll('[data-preset]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const preset = presets[button.dataset.preset];
+      if (!preset) return;
+      $('offer').value = preset.offer;
+      $('goal').value = preset.goal;
+      $('tone').value = preset.tone;
+      document.querySelectorAll('[data-preset]').forEach((el) => el.classList.remove('active'));
+      button.classList.add('active');
+      hideNotice('formNotice');
+    });
+  });
+  $('generateBtn').addEventListener('click', () => generateMessage());
+  $('regenerateBtn').addEventListener('click', () => {
+    if (lastRequest) generateMessage(lastRequest);
+  });
+  $('copyBtn').addEventListener('click', () => copyText(currentResult));
+  $('clearOutputBtn').addEventListener('click', clearOutput);
+  $('settingsToggle').addEventListener('click', () => {
+    $('settingsPanel').classList.toggle('open');
+    if ($('settingsPanel').classList.contains('open')) {
+      $('settingsPanel').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+  $('saveSettingsBtn').addEventListener('click', () => {
+    const apiBase = getApiBase();
+    if (!/^https?:\/\//i.test(apiBase)) {
+      showNotice('settingsNotice', 'Адрес сервера должен начинаться с https:// или http://', 'error');
+      return;
+    }
+    settings = {
+      apiBase,
+      defaultOffer: $('defaultOffer').value.trim()
+    };
+    const saved = writeStorage(SETTINGS_KEY, settings);
+    if (settings.defaultOffer) $('offer').value = settings.defaultOffer;
+    showNotice(
+      'settingsNotice',
+      saved ? 'Настройки сохранены на этом устройстве.' : 'Браузер не разрешил сохранить настройки.',
+      saved ? 'success' : 'error'
+    );
+    checkBackend(false);
+  });
+  $('testConnectionBtn').addEventListener('click', () => checkBackend(true));
+  $('resetSettingsBtn').addEventListener('click', () => {
+    settings = { apiBase: DEFAULT_API, defaultOffer: '' };
+    $('apiBase').value = DEFAULT_API;
+    $('defaultOffer').value = '';
+    $('offer').value = '';
+    writeStorage(SETTINGS_KEY, settings);
+    showNotice('settingsNotice', 'Настройки сброшены.', 'success');
+    checkBackend(false);
+  });
+  $('clearHistoryBtn').addEventListener('click', () => {
+    if (!history.length) {
+      showNotice('outputNotice', 'История уже пустая.', 'info');
+      return;
+    }
+    if (!window.confirm('Удалить всю историю сообщений на этом устройстве?')) return;
+    history = [];
+    writeStorage(HISTORY_KEY, history);
+    renderHistory();
+    showNotice('outputNotice', 'История очищена.', 'success');
+  });
+  function init() {
+    $('apiBase').value = settings.apiBase || DEFAULT_API;
+    $('defaultOffer').value = settings.defaultOffer || '';
+    if (settings.defaultOffer && !$('offer').value) {
+      $('offer').value = settings.defaultOffer;
+    }
+    renderHistory();
+    updateStats();
+    checkBackend(false);
+  }
+  init();
+})();
+</script>
+</body>
+</html>
