@@ -76,6 +76,8 @@ button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-
 .btn-primary:hover { filter: brightness(1.1); }
 .btn-success { border-color: #245c54; color: var(--accent2); }
 .btn-danger { color: var(--danger); }
+.btn-tg { background: #2AABEE; color: white; border: none; }
+.btn-tg:hover { background: #229ED9; }
 .hero { margin: 28px 0 24px; }
 .eyebrow {
   display: inline-flex; gap: 8px; align-items: center;
@@ -376,6 +378,13 @@ select { appearance: auto; }
           <button class="btn" id="regenerateBtn" type="button" disabled>↻ Перегенерировать</button>
           <button class="btn" id="clearOutputBtn" type="button">Очистить</button>
         </div>
+        
+        <!-- Блок отправки в Telegram -->
+        <div style="margin-top: 15px; display: flex; gap: 10px; align-items: center;">
+            <input type="text" id="tgChatId" placeholder="Твой Telegram ID (цифры)" style="margin-bottom: 0;">
+            <button class="btn btn-tg" id="sendTgBtn" type="button" disabled>✈ В Telegram</button>
+        </div>
+
         <div class="notice" id="outputNotice" role="status" aria-live="polite"></div>
       </section>
       <div class="section-title">
@@ -428,11 +437,12 @@ select { appearance: auto; }
   let history = readStorage(HISTORY_KEY, []);
   let settings = readStorage(SETTINGS_KEY, {
     apiBase: DEFAULT_API,
-    defaultOffer: ''
+    defaultOffer: '',
+    tgChatId: ''
   });
   if (!Array.isArray(history)) history = [];
   if (!settings || typeof settings !== 'object') {
-    settings = { apiBase: DEFAULT_API, defaultOffer: '' };
+    settings = { apiBase: DEFAULT_API, defaultOffer: '', tgChatId: '' };
   }
   function readStorage(key, fallback) {
     try {
@@ -579,6 +589,7 @@ select { appearance: auto; }
     output.classList.remove('empty');
     output.textContent = text;
     $('copyBtn').disabled = !text;
+    $('sendTgBtn').disabled = !text;
     $('regenerateBtn').disabled = !lastRequest || isGenerating;
   }
   function clearOutput() {
@@ -587,6 +598,7 @@ select { appearance: auto; }
     $('output').innerHTML =
       '<div class="empty-inner"><div class="empty-icon">✧</div><strong>Здесь появится сообщение</strong><p>Заполни предложение и нажми кнопку генерации. Ответ придёт от ИИ через твой backend.</p></div>';
     $('copyBtn').disabled = true;
+    $('sendTgBtn').disabled = true;
     $('regenerateBtn').disabled = !lastRequest || isGenerating;
     hideNotice('outputNotice');
   }
@@ -744,6 +756,46 @@ select { appearance: auto; }
       $('regenerateBtn').disabled = !lastRequest || !currentResult;
     }
   }
+
+  async function sendToTelegram() {
+    const chatId = $('tgChatId').value.trim();
+    if (!chatId) {
+      showNotice('outputNotice', 'Введи свой Telegram ID!', 'error');
+      return;
+    }
+    if (!currentResult) {
+      showNotice('outputNotice', 'Сначала сгенерируй сообщение!', 'error');
+      return;
+    }
+
+    const btn = $('sendTgBtn');
+    const originalText = btn.innerHTML;
+    btn.disabled = true;
+    btn.innerHTML = '<span class="loader"></span>Отправка...';
+    hideNotice('outputNotice');
+
+    try {
+      const response = await requestJson(getApiBase() + '/api/send-telegram', {
+        method: 'POST',
+        body: JSON.stringify({ chatId: chatId, message: currentResult })
+      }, 30000);
+
+      if (response.success) {
+        showNotice('outputNotice', '✅ Сообщение успешно отправлено в Telegram!', 'success');
+        // Сохраняем ID для будущих отправок
+        settings.tgChatId = chatId;
+        writeStorage(SETTINGS_KEY, settings);
+      } else {
+        throw new Error(response.error || 'Неизвестная ошибка');
+      }
+    } catch (error) {
+      showNotice('outputNotice', 'Ошибка отправки: ' + error.message, 'error');
+    } finally {
+      btn.disabled = false;
+      btn.innerHTML = originalText;
+    }
+  }
+
   const presets = {
     automation: {
       offer: 'AI-автоматизация обработки входящих заявок, первичная квалификация потенциальных клиентов и помощь с ответами на типовые вопросы.',
@@ -783,6 +835,7 @@ select { appearance: auto; }
     if (lastRequest) generateMessage(lastRequest);
   });
   $('copyBtn').addEventListener('click', () => copyText(currentResult));
+  $('sendTgBtn').addEventListener('click', sendToTelegram);
   $('clearOutputBtn').addEventListener('click', clearOutput);
   $('settingsToggle').addEventListener('click', () => {
     $('settingsPanel').classList.toggle('open');
@@ -798,7 +851,8 @@ select { appearance: auto; }
     }
     settings = {
       apiBase,
-      defaultOffer: $('defaultOffer').value.trim()
+      defaultOffer: $('defaultOffer').value.trim(),
+      tgChatId: settings.tgChatId // сохраняем старый ID
     };
     const saved = writeStorage(SETTINGS_KEY, settings);
     if (settings.defaultOffer) $('offer').value = settings.defaultOffer;
@@ -811,7 +865,7 @@ select { appearance: auto; }
   });
   $('testConnectionBtn').addEventListener('click', () => checkBackend(true));
   $('resetSettingsBtn').addEventListener('click', () => {
-    settings = { apiBase: DEFAULT_API, defaultOffer: '' };
+    settings = { apiBase: DEFAULT_API, defaultOffer: '', tgChatId: '' };
     $('apiBase').value = DEFAULT_API;
     $('defaultOffer').value = '';
     $('offer').value = '';
@@ -835,6 +889,9 @@ select { appearance: auto; }
     $('defaultOffer').value = settings.defaultOffer || '';
     if (settings.defaultOffer && !$('offer').value) {
       $('offer').value = settings.defaultOffer;
+    }
+    if (settings.tgChatId) {
+      $('tgChatId').value = settings.tgChatId;
     }
     renderHistory();
     updateStats();
