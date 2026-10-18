@@ -7,234 +7,82 @@
 <title>LeadPilot Pro — AI Sales Workspace</title>
 <style>
 :root {
-  --bg: #080b12;
-  --panel: #101622;
-  --panel2: #151d2c;
-  --border: #273247;
-  --text: #f1f5ff;
-  --muted: #929eb3;
-  --accent: #8b7cff;
-  --accent2: #5de1c2;
-  --danger: #ff7185;
-  --radius: 18px;
+  --bg: #080b12; --panel: #101622; --panel2: #151d2c; --border: #273247;
+  --text: #f1f5ff; --muted: #929eb3; --accent: #8b7cff; --accent2: #5de1c2;
+  --danger: #ff7185; --radius: 18px;
 }
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body {
-  margin: 0;
-  min-height: 100vh;
-  color: var(--text);
-  background:
-    radial-gradient(ellipse at 15% 0%, rgba(95,84,255,.16), transparent 38%),
-    radial-gradient(ellipse at 100% 30%, rgba(32,198,169,.08), transparent 35%),
-    var(--bg);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-}
+body { margin: 0; min-height: 100vh; color: var(--text); background: radial-gradient(ellipse at 15% 0%, rgba(95,84,255,.16), transparent 38%), radial-gradient(ellipse at 100% 30%, rgba(32,198,169,.08), transparent 35%), var(--bg); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
 button, input, textarea, select { font: inherit; }
 button { cursor: pointer; }
 button:disabled { opacity: .55; cursor: not-allowed; }
-button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible {
-  outline: 2px solid var(--accent2);
-  outline-offset: 2px;
-}
 .app { width: min(1440px, 100%); margin: auto; padding: 24px; }
-.topbar {
-  display: flex; justify-content: space-between; align-items: center;
-  gap: 18px; margin-bottom: 30px;
-}
+.topbar { display: flex; justify-content: space-between; align-items: center; gap: 18px; margin-bottom: 30px; }
 .brand { display: flex; align-items: center; gap: 13px; min-width: 0; }
-.logo {
-  width: 48px; height: 48px; border-radius: 15px;
-  display: grid; place-items: center; flex-shrink: 0;
-  font-weight: 900; font-size: 21px; color: white;
-  background: linear-gradient(135deg, #9a7cff, #4b48cf);
-  box-shadow: 0 8px 30px #7564ff35;
-}
+.logo { width: 48px; height: 48px; border-radius: 15px; display: grid; place-items: center; flex-shrink: 0; font-weight: 900; font-size: 21px; color: white; background: linear-gradient(135deg, #9a7cff, #4b48cf); box-shadow: 0 8px 30px #7564ff35; }
 .brand h1 { font-size: 20px; margin: 0; letter-spacing: -.6px; }
 .brand p { margin: 5px 0 0; color: var(--muted); font-size: 12px; }
 .top-actions { display: flex; align-items: center; gap: 10px; }
-.status {
-  display: inline-flex; align-items: center; gap: 8px;
-  color: var(--muted); background: #111827;
-  border: 1px solid var(--border); border-radius: 999px;
-  padding: 10px 13px; font-size: 12px; white-space: nowrap;
-}
+.status { display: inline-flex; align-items: center; gap: 8px; color: var(--muted); background: #111827; border: 1px solid var(--border); border-radius: 999px; padding: 10px 13px; font-size: 12px; white-space: nowrap; }
 .dot { width: 8px; height: 8px; border-radius: 50%; background: #788397; }
 .status.online .dot { background: var(--accent2); box-shadow: 0 0 10px #5de1c2; }
 .status.offline .dot { background: var(--danger); }
-.btn {
-  border: 1px solid var(--border); background: var(--panel2);
-  color: var(--text); border-radius: 12px; padding: 11px 15px;
-  transition: .18s ease; font-weight: 650; font-size: 13px;
-}
+.btn { border: 1px solid var(--border); background: var(--panel2); color: var(--text); border-radius: 12px; padding: 11px 15px; transition: .18s ease; font-weight: 650; font-size: 13px; }
 .btn:hover { border-color: #65739a; transform: translateY(-1px); }
-.btn-primary {
-  border: none; color: #fff;
-  background: linear-gradient(135deg, #8b7cff, #6554e8);
-  box-shadow: 0 8px 24px #6e5aff2c;
-}
+.btn-primary { border: none; color: #fff; background: linear-gradient(135deg, #8b7cff, #6554e8); box-shadow: 0 8px 24px #6e5aff2c; }
 .btn-primary:hover { filter: brightness(1.1); }
 .btn-success { border-color: #245c54; color: var(--accent2); }
 .btn-danger { color: var(--danger); }
 .btn-tg { background: #2AABEE; color: white; border: none; }
 .btn-tg:hover { background: #229ED9; }
 .hero { margin: 28px 0 24px; }
-.eyebrow {
-  display: inline-flex; gap: 8px; align-items: center;
-  color: var(--accent2); font-size: 11px; font-weight: 800;
-  letter-spacing: 1.8px; text-transform: uppercase;
-}
-.hero h2 {
-  font-size: clamp(29px, 5vw, 46px); line-height: 1.08;
-  letter-spacing: -1.7px; margin: 15px 0 12px; max-width: 780px;
-}
-.gradient-text {
-  background: linear-gradient(90deg, #a99aff, #64e6c6);
-  -webkit-background-clip: text; background-clip: text; color: transparent;
-}
+.eyebrow { display: inline-flex; gap: 8px; align-items: center; color: var(--accent2); font-size: 11px; font-weight: 800; letter-spacing: 1.8px; text-transform: uppercase; }
+.hero h2 { font-size: clamp(29px, 5vw, 46px); line-height: 1.08; letter-spacing: -1.7px; margin: 15px 0 12px; max-width: 780px; }
+.gradient-text { background: linear-gradient(90deg, #a99aff, #64e6c6); -webkit-background-clip: text; background-clip: text; color: transparent; }
 .hero p { color: var(--muted); max-width: 680px; line-height: 1.7; margin: 0; font-size: 14px; }
-.stats {
-  display: grid; grid-template-columns: repeat(4, minmax(0,1fr));
-  gap: 14px; margin: 24px 0;
-}
-.stat, .card {
-  border: 1px solid var(--border);
-  background: linear-gradient(145deg, #111826f5, #0d121df5);
-  border-radius: var(--radius);
-}
+.stats { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 14px; margin: 24px 0; }
+.stat, .card { border: 1px solid var(--border); background: linear-gradient(145deg, #111826f5, #0d121df5); border-radius: var(--radius); }
 .stat { padding: 18px; min-width: 0; }
 .stat-label { color: var(--muted); font-size: 12px; }
 .stat-value { font-size: 27px; font-weight: 800; margin: 12px 0 5px; letter-spacing: -.8px; }
 .stat-foot { color: #8b97ad; font-size: 11px; }
-.layout {
-  display: grid; grid-template-columns: minmax(0,1.1fr) minmax(0,.9fr);
-  gap: 18px; align-items: start;
-}
+.layout { display: grid; grid-template-columns: minmax(0,1.1fr) minmax(0,.9fr); gap: 18px; align-items: start; }
 .card { padding: 23px; min-width: 0; }
-.card-head {
-  display: flex; justify-content: space-between; align-items: flex-start;
-  gap: 12px; margin-bottom: 22px;
-}
+.card-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 22px; }
 .card-head h3 { margin: 0; font-size: 18px; letter-spacing: -.3px; }
 .card-head p { color: var(--muted); font-size: 12px; line-height: 1.6; margin: 7px 0 0; }
-.step {
-  width: 32px; height: 32px; border-radius: 11px; display: grid; place-items: center;
-  background: #272342; color: #b7aaff; font-size: 13px; font-weight: 800; flex-shrink: 0;
-}
+.step { width: 32px; height: 32px; border-radius: 11px; display: grid; place-items: center; background: #272342; color: #b7aaff; font-size: 13px; font-weight: 800; flex-shrink: 0; }
 .field { margin-bottom: 17px; }
-.field label {
-  display: block; margin-bottom: 8px; color: #d9e0f1;
-  font-size: 12px; font-weight: 700;
-}
+.field label { display: block; margin-bottom: 8px; color: #d9e0f1; font-size: 12px; font-weight: 700; }
 .field small { display: block; margin-top: 6px; color: var(--muted); font-size: 11px; line-height: 1.5; }
-input, textarea, select {
-  width: 100%; border: 1px solid #2b3549; border-radius: 11px;
-  background: #0a0f19; color: var(--text); padding: 13px 14px;
-  outline: none; transition: border .15s; font-size: 13px;
-}
+input, textarea, select { width: 100%; border: 1px solid #2b3549; border-radius: 11px; background: #0a0f19; color: var(--text); padding: 13px 14px; outline: none; transition: border .15s; font-size: 13px; }
 input:focus, textarea:focus, select:focus { border-color: var(--accent); }
 input::placeholder, textarea::placeholder { color: #68758b; }
 textarea { resize: vertical; min-height: 100px; line-height: 1.6; }
 select { appearance: auto; }
 .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 13px; }
 .preset-row { display: flex; gap: 8px; flex-wrap: wrap; margin: 0 0 17px; }
-.preset {
-  border: 1px solid var(--border); border-radius: 999px; padding: 8px 11px;
-  background: #111827; color: #c7d0e4; font-size: 11px;
-}
+.preset { border: 1px solid var(--border); border-radius: 999px; padding: 8px 11px; background: #111827; color: #c7d0e4; font-size: 11px; }
 .preset:hover, .preset.active { border-color: var(--accent); color: #c4baff; background: #211d3b; }
 .full { width: 100%; }
 .generate-btn { padding: 15px; font-size: 14px; margin-top: 4px; }
-.notice {
-  display: none; border-radius: 11px; padding: 12px 14px;
-  margin-top: 14px; font-size: 12px; line-height: 1.6; white-space: pre-wrap;
-}
+.notice { display: none; border-radius: 11px; padding: 12px 14px; margin-top: 14px; font-size: 12px; line-height: 1.6; white-space: pre-wrap; }
 .notice.show { display: block; }
 .notice.error { color: #ffadb8; background: #381923; border: 1px solid #65303c; }
 .notice.success { color: #9ef4dc; background: #102c29; border: 1px solid #24574f; }
 .notice.info { color: #c8c0ff; background: #211d3c; border: 1px solid #3e366a; }
-.output-card { margin-top: 18px; }
-.output-top {
-  display: flex; align-items: center; justify-content: space-between;
-  gap: 12px; margin-bottom: 16px;
-}
-.output-top h3 { margin: 0; font-size: 17px; }
-.output-badge {
-  font-size: 10px; color: var(--accent2); background: #122b29;
-  border: 1px solid #24534c; border-radius: 999px; padding: 6px 9px;
-}
-.output {
-  min-height: 220px; border: 1px solid #293449; border-radius: 13px;
-  background: #090e17; padding: 18px; white-space: pre-wrap;
-  line-height: 1.8; font-size: 14px; overflow-wrap: anywhere;
-}
+.output { min-height: 220px; border: 1px solid #293449; border-radius: 13px; background: #090e17; padding: 18px; white-space: pre-wrap; line-height: 1.8; font-size: 14px; overflow-wrap: anywhere; }
 .output.empty { display: grid; place-items: center; text-align: center; color: #748097; }
-.empty-inner { max-width: 260px; }
-.empty-icon { font-size: 28px; margin-bottom: 12px; }
-.empty-inner p { font-size: 12px; line-height: 1.7; }
 .output-actions { display: flex; gap: 9px; flex-wrap: wrap; margin-top: 12px; }
-.section-title {
-  display: flex; align-items: center; justify-content: space-between;
-  gap: 12px; margin: 28px 0 14px;
-}
+.section-title { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 28px 0 14px; }
 .section-title h3 { margin: 0; font-size: 17px; }
-.section-title span { color: var(--muted); font-size: 11px; }
-.history-list { display: grid; gap: 10px; }
-.history-item {
-  display: flex; justify-content: space-between; align-items: flex-start; gap: 12px;
-  background: #0c121e; border: 1px solid var(--border); border-radius: 13px; padding: 14px;
-}
-.history-main { min-width: 0; flex: 1; cursor: pointer; }
-.history-main strong { display: block; font-size: 12px; margin-bottom: 6px; }
-.history-main p {
-  color: var(--muted); font-size: 11px; line-height: 1.6; margin: 0;
-  overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
-}
-.history-date { color: #7e8aa0; font-size: 10px; margin-top: 8px; }
-.history-buttons { display: flex; gap: 5px; flex-shrink: 0; }
-.icon-btn {
-  width: 32px; height: 32px; border-radius: 9px; border: 1px solid var(--border);
-  background: #141c2b; color: #cbd4e8;
-}
-.icon-btn:hover { border-color: var(--accent); }
-.empty-history { padding: 25px; text-align: center; color: var(--muted); font-size: 12px; border: 1px dashed var(--border); border-radius: 12px; }
-.settings-panel {
-  display: none; margin-top: 18px; padding: 20px;
-  border: 1px solid var(--border); border-radius: var(--radius); background: var(--panel);
-}
+.settings-panel { display: none; margin-top: 18px; padding: 20px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--panel); }
 .settings-panel.open { display: block; }
-.settings-panel h3 { margin: 0 0 16px; font-size: 16px; }
-.footer {
-  text-align: center; padding: 28px 0 12px; color: #68758b; font-size: 11px; line-height: 1.8;
-}
-.loader {
-  width: 16px; height: 16px; display: inline-block; vertical-align: middle;
-  border: 2px solid #ffffff55; border-top-color: white; border-radius: 50%;
-  animation: spin .7s linear infinite; margin-right: 8px;
-}
+.footer { text-align: center; padding: 28px 0 12px; color: #68758b; font-size: 11px; line-height: 1.8; }
+.loader { width: 16px; height: 16px; display: inline-block; vertical-align: middle; border: 2px solid #ffffff55; border-top-color: white; border-radius: 50%; animation: spin .7s linear infinite; margin-right: 8px; }
 @keyframes spin { to { transform: rotate(360deg); } }
-@media (max-width: 900px) {
-  .layout { grid-template-columns: 1fr; }
-  .stats { grid-template-columns: repeat(2,minmax(0,1fr)); }
-}
-@media (max-width: 560px) {
-  .app { padding: 15px; }
-  .topbar { align-items: flex-start; }
-  .brand h1 { font-size: 17px; }
-  .brand p { font-size: 10px; }
-  .logo { width: 42px; height: 42px; }
-  .top-actions { flex-direction: column; align-items: stretch; }
-  .top-actions .btn { padding: 9px 10px; }
-  .status { padding: 8px 10px; font-size: 10px; }
-  .hero { margin-top: 24px; }
-  .hero h2 { letter-spacing: -1px; }
-  .stats { gap: 9px; }
-  .stat { padding: 13px; }
-  .stat-value { font-size: 23px; }
-  .card { padding: 17px; }
-  .grid2 { grid-template-columns: 1fr; gap: 0; }
-  .history-item { padding: 11px; }
-}
+@media (max-width: 900px) { .layout { grid-template-columns: 1fr; } .stats { grid-template-columns: repeat(2,minmax(0,1fr)); } }
+@media (max-width: 560px) { .app { padding: 15px; } .brand h1 { font-size: 17px; } .grid2 { grid-template-columns: 1fr; gap: 0; } }
 </style>
 </head>
 <body>
@@ -244,7 +92,7 @@ select { appearance: auto; }
       <div class="logo">LP</div>
       <div>
         <h1>LeadPilot <span class="gradient-text">Pro</span></h1>
-        <p>AI SALES WORKSPACE · VERSION 2.0</p>
+        <p>AI SALES WORKSPACE · VERSION 3.0</p>
       </div>
     </div>
     <div class="top-actions">
@@ -254,651 +102,217 @@ select { appearance: auto; }
       <button class="btn" id="settingsToggle" type="button">⚙ Настройки</button>
     </div>
   </header>
-  <section class="hero">
-    <div class="eyebrow">✦ AI-ассистент продаж</div>
-    <h2>Превращай холодные контакты<br>в <span class="gradient-text">реальные диалоги.</span></h2>
-    <p>Создавай персонализированные сообщения для потенциальных клиентов. Укажи контекст — ИИ подготовит сообщение, которое звучит по-человечески, а не как массовая рассылка.</p>
-  </section>
-  <section class="stats">
-    <div class="stat">
-      <div class="stat-label">Создано сообщений</div>
-      <div class="stat-value" id="statGenerated">0</div>
-      <div class="stat-foot">За всё время на этом устройстве</div>
-    </div>
-    <div class="stat">
-      <div class="stat-label">В истории</div>
-      <div class="stat-value" id="statHistory">0</div>
-      <div class="stat-foot">Сохранённых генераций</div>
-    </div>
-    <div class="stat">
-      <div class="stat-label">Сервер</div>
-      <div class="stat-value" id="statServer">…</div>
-      <div class="stat-foot">Подключение к backend</div>
-    </div>
-    <div class="stat">
-      <div class="stat-label">AI</div>
-      <div class="stat-value" id="statAI">…</div>
-      <div class="stat-foot">Настройка на сервере</div>
-    </div>
-  </section>
-  <main class="layout">
+
+  <!-- Переключатель вкладок -->
+  <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+    <button class="btn btn-primary" id="tabAi" onclick="switchTab('ai')">✦ Генератор ИИ</button>
+    <button class="btn" id="tabEmail" onclick="switchTab('email')">✉ Массовая Email-рассылка</button>
+  </div>
+
+  <!-- ВКЛАДКА 1: Генератор ИИ -->
+  <div id="sectionAi">
+    <main class="layout">
+      <section class="card">
+        <div class="card-head"><div><h3>Создание сообщения</h3><p>Расскажи ИИ, кому и что мы предлагаем.</p></div><div class="step">01</div></div>
+        <div class="field"><label>Компания или имя контакта</label><input id="company" placeholder="Например, ARH STUDIO"></div>
+        <div class="grid2">
+          <div class="field"><label>Сфера бизнеса</label><input id="niche" placeholder="Дизайн интерьера"></div>
+          <div class="field"><label>Канал связи</label><select id="channel"><option>Telegram</option><option>Email</option></select></div>
+        </div>
+        <div class="field"><label>Что мы предлагаем?</label><textarea id="offer" placeholder="Например: AI-автоматизация обработки заявок..."></textarea></div>
+        <div class="field"><label>Что известно о клиенте?</label><textarea id="signal" placeholder="Например: публикует проекты, принимает заявки вручную..."></textarea></div>
+        <button class="btn btn-primary full generate-btn" id="generateBtn" type="button">✦ Создать персональное сообщение</button>
+        <div class="notice" id="formNotice"></div>
+      </section>
+      <div>
+        <section class="card">
+          <div class="card-head"><div><h3>Результат ИИ</h3><p>Готовый текст.</p></div><div class="step">02</div></div>
+          <div class="output empty" id="output"><div class="empty-inner">Здесь появится сообщение...</div></div>
+          <div class="output-actions">
+            <button class="btn btn-primary" id="copyBtn" type="button" disabled>⧉ Копировать</button>
+            <button class="btn" id="regenerateBtn" type="button" disabled>↻ Заново</button>
+          </div>
+          <div style="margin-top: 15px; display: flex; gap: 10px; align-items: center;">
+              <input type="text" id="tgChatId" placeholder="Твой Telegram ID" style="margin-bottom: 0;">
+              <button class="btn btn-tg" id="sendTgBtn" type="button" disabled>✈ В Telegram</button>
+          </div>
+          <div class="notice" id="outputNotice"></div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <!-- ВКЛАДКА 2: Email Рассылка -->
+  <div id="sectionEmail" style="display: none;">
     <section class="card">
       <div class="card-head">
         <div>
-          <h3>Создание сообщения</h3>
-          <p>Расскажи ИИ, кому и что мы предлагаем.</p>
+          <h3>Массовая Email-рассылка</h3>
+          <p>Загрузи список почт (каждая с новой строки) и отправь им готовое письмо.</p>
         </div>
-        <div class="step">01</div>
+        <div class="step">✉</div>
       </div>
       <div class="field">
-        <label for="company">Компания или имя контакта</label>
-        <input id="company" placeholder="Например, ARH STUDIO" autocomplete="organization">
-      </div>
-      <div class="grid2">
-        <div class="field">
-          <label for="niche">Сфера бизнеса</label>
-          <input id="niche" placeholder="Дизайн интерьера">
-        </div>
-        <div class="field">
-          <label for="channel">Канал связи</label>
-          <select id="channel">
-            <option value="Telegram">Telegram</option>
-            <option value="ВКонтакте">ВКонтакте</option>
-            <option value="WhatsApp">WhatsApp</option>
-            <option value="Instagram Direct">Instagram Direct</option>
-            <option value="Электронная почта">Электронная почта</option>
-            <option value="Avito">Avito</option>
-            <option value="Другое">Другой канал</option>
-          </select>
-        </div>
+        <label>Тема письма</label>
+        <input id="emailSubject" placeholder="Предложение о сотрудничестве" value="Предложение о сотрудничестве">
       </div>
       <div class="field">
-        <label for="offer">Что мы предлагаем?</label>
-        <textarea id="offer" placeholder="Например: AI-автоматизация обработки заявок, квалификация клиентов и ответы на типовые вопросы."></textarea>
-        <small>Чем конкретнее предложение, тем полезнее будет результат.</small>
+        <label>Список Email (каждый с новой строки)</label>
+        <textarea id="emailList" placeholder="client1@mail.ru&#10;director@company.ru&#10;info@studio.com" style="min-height: 120px;"></textarea>
       </div>
       <div class="field">
-        <label for="signal">Что известно о клиенте?</label>
-        <textarea id="signal" placeholder="Например: публикует проекты, принимает заявки в Telegram, отвечает вручную. Если ничего не знаешь — оставь поле пустым." style="min-height:85px"></textarea>
+        <label>Текст письма</label>
+        <textarea id="emailBody" placeholder="Здравствуйте! Меня зовут... Мы занимаемся..." style="min-height: 150px;"></textarea>
       </div>
-      <div class="grid2">
-        <div class="field">
-          <label for="goal">Цель сообщения</label>
-          <select id="goal">
-            <option value="Начать диалог">Начать диалог</option>
-            <option value="Предложить короткую демонстрацию">Предложить демо</option>
-            <option value="Получить ответ на вопрос">Получить ответ</option>
-            <option value="Назначить созвон">Назначить созвон</option>
-            <option value="Вернуться к старому контакту">Вернуться к контакту</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="tone">Стиль сообщения</label>
-          <select id="tone">
-            <option value="Дружелюбный и естественный">Дружелюбный</option>
-            <option value="Уверенный и деловой">Деловой</option>
-            <option value="Короткий, прямой, без воды">Короткий и прямой</option>
-            <option value="Неформальный и живой">Неформальный</option>
-            <option value="Экспертный и спокойный">Экспертный</option>
-          </select>
-        </div>
-      </div>
-      <div class="field">
-        <label>Быстрые сценарии</label>
-        <div class="preset-row">
-          <button class="preset" type="button" data-preset="automation">AI-автоматизация</button>
-          <button class="preset" type="button" data-preset="content">Контент и заявки</button>
-          <button class="preset" type="button" data-preset="website">Сайт и продажи</button>
-          <button class="preset" type="button" data-preset="followup">Повторный контакт</button>
-        </div>
-      </div>
-      <button class="btn btn-primary full generate-btn" id="generateBtn" type="button">
-        ✦ Создать персональное сообщение
-      </button>
-      <div class="notice" id="formNotice" role="status" aria-live="polite"></div>
+      <button class="btn btn-primary full generate-btn" id="sendEmailBtn" type="button">🚀 Отправить письма</button>
+      <div class="notice" id="emailNotice"></div>
     </section>
-    <div>
-      <section class="card">
-        <div class="card-head">
-          <div>
-            <h3>Результат ИИ</h3>
-            <p>Готовый текст для отправки клиенту.</p>
-          </div>
-          <div class="step">02</div>
-        </div>
-        <div class="output empty" id="output" aria-live="polite">
-          <div class="empty-inner">
-            <div class="empty-icon">✧</div>
-            <strong>Здесь появится сообщение</strong>
-            <p>Заполни предложение и нажми кнопку генерации. Ответ придёт от ИИ через твой backend.</p>
-          </div>
-        </div>
-        <div class="output-actions">
-          <button class="btn btn-primary" id="copyBtn" type="button" disabled>⧉ Копировать</button>
-          <button class="btn" id="regenerateBtn" type="button" disabled>↻ Перегенерировать</button>
-          <button class="btn" id="clearOutputBtn" type="button">Очистить</button>
-        </div>
-        
-        <!-- Блок отправки в Telegram -->
-        <div style="margin-top: 15px; display: flex; gap: 10px; align-items: center;">
-            <input type="text" id="tgChatId" placeholder="Твой Telegram ID (цифры)" style="margin-bottom: 0;">
-            <button class="btn btn-tg" id="sendTgBtn" type="button" disabled>✈ В Telegram</button>
-        </div>
+  </div>
 
-        <div class="notice" id="outputNotice" role="status" aria-live="polite"></div>
-      </section>
-      <div class="section-title">
-        <h3>История генераций</h3>
-        <span id="historyCount">0 записей</span>
-      </div>
-      <section class="history-list" id="historyList">
-        <div class="empty-history">Здесь будут сохранены созданные сообщения.</div>
-      </section>
-      <div style="margin-top:12px;display:flex;justify-content:flex-end">
-        <button class="btn btn-danger" id="clearHistoryBtn" type="button">Очистить историю</button>
-      </div>
-    </div>
-  </main>
   <section class="settings-panel" id="settingsPanel">
-    <h3>Настройки приложения</h3>
+    <h3>Настройки</h3>
     <div class="field">
-      <label for="apiBase">Адрес backend-сервера</label>
+      <label>Адрес backend-сервера</label>
       <input id="apiBase" type="url" placeholder="https://leadpilot-pro.onrender.com">
-      <small>Обычно менять не нужно. Вводи только адрес сервера, без /api/health в конце.</small>
     </div>
-    <div class="field">
-      <label for="defaultOffer">Предложение по умолчанию</label>
-      <textarea id="defaultOffer" placeholder="Опиши свой продукт или услугу"></textarea>
-    </div>
-    <div style="display:flex;gap:10px;flex-wrap:wrap">
-      <button class="btn btn-primary" id="saveSettingsBtn" type="button">Сохранить настройки</button>
-      <button class="btn" id="testConnectionBtn" type="button">Проверить сервер</button>
-      <button class="btn" id="resetSettingsBtn" type="button">Сбросить настройки</button>
-    </div>
-    <div class="notice" id="settingsNotice" role="status" aria-live="polite"></div>
+    <button class="btn btn-primary" id="saveSettingsBtn" type="button">Сохранить</button>
+    <div class="notice" id="settingsNotice"></div>
   </section>
-  <footer class="footer">
-    LeadPilot Pro · AI Sales Workspace<br>
-    Сообщения генерируются сервером с использованием настроенной модели ИИ.<br>
-    Перед отправкой проверяй факты и персональные данные.
-  </footer>
+  
+  <footer class="footer">LeadPilot Pro · AI Sales Workspace</footer>
 </div>
+
 <script>
-(() => {
-  'use strict';
-  const DEFAULT_API = 'https://leadpilot-pro.onrender.com';
-  const SETTINGS_KEY = 'leadpilot_pro_settings_v2';
-  const HISTORY_KEY = 'leadpilot_pro_history_v2';
-  const COUNT_KEY = 'leadpilot_pro_generated_v2';
-  const $ = (id) => document.getElementById(id);
-  let currentResult = '';
-  let isGenerating = false;
-  let lastRequest = null;
-  let history = readStorage(HISTORY_KEY, []);
-  let settings = readStorage(SETTINGS_KEY, {
-    apiBase: DEFAULT_API,
-    defaultOffer: '',
-    tgChatId: ''
-  });
-  if (!Array.isArray(history)) history = [];
-  if (!settings || typeof settings !== 'object') {
-    settings = { apiBase: DEFAULT_API, defaultOffer: '', tgChatId: '' };
-  }
-  function readStorage(key, fallback) {
-    try {
-      const raw = localStorage.getItem(key);
-      return raw ? JSON.parse(raw) : fallback;
-    } catch {
-      return fallback;
-    }
-  }
-  function writeStorage(key, value) {
-    try {
-      localStorage.setItem(key, JSON.stringify(value));
-      return true;
-    } catch {
-      return false;
-    }
-  }
-  function getApiBase() {
-    const raw = ($('apiBase').value || settings.apiBase || DEFAULT_API).trim();
-    return raw.replace(/\/+$/, '').replace(/\/api$/, '');
-  }
-  function showNotice(id, message, type = 'info') {
-    const box = $(id);
-    box.textContent = message;
-    box.className = 'notice show ' + type;
-  }
-  function hideNotice(id) {
-    const box = $(id);
-    box.textContent = '';
-    box.className = 'notice';
-  }
-  async function requestJson(url, options = {}, timeout = 45000) {
-    const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), timeout);
-    try {
-      const response = await fetch(url, {
-        ...options,
-        signal: controller.signal,
-        headers: {
-          'Content-Type': 'application/json',
-          ...(options.headers || {})
-        }
-      });
-      const raw = await response.text();
-      let data = {};
-      try {
-        data = raw ? JSON.parse(raw) : {};
-      } catch {
-        throw new Error('Сервер вернул не JSON. Проверь адрес API и настройки backend.');
-      }
-      if (!response.ok) {
-        const message = data.error || data.message || `HTTP ${response.status}`;
-        const details = data.details ? '\n' + data.details : '';
-        throw new Error(message + details);
-      }
-      return data;
-    } catch (error) {
-      if (error.name === 'AbortError') {
-        throw new Error('Сервер слишком долго отвечает. Возможно, Render запускается после простоя. Попробуй ещё раз.');
-      }
-      if (error instanceof TypeError) {
-        throw new Error('Не удалось подключиться к серверу. Проверь интернет, адрес backend и настройки CORS в Render.');
-      }
-      throw error;
-    } finally {
-      clearTimeout(timer);
-    }
-  }
-  function setConnection(state, text) {
-    const status = $('connectionStatus');
-    status.classList.remove('online', 'offline');
-    if (state === 'online') status.classList.add('online');
-    if (state === 'offline') status.classList.add('offline');
-    $('connectionText').textContent = text;
-    $('statServer').textContent = state === 'online' ? 'OK' : state === 'offline' ? 'OFF' : '…';
-  }
-  async function checkBackend(showMessage = false) {
-    setConnection('checking', 'Проверяем сервер…');
-    if (showMessage) showNotice('settingsNotice', 'Проверяем соединение с backend…', 'info');
-    try {
-      const data = await requestJson(getApiBase() + '/api/health', { method: 'GET' }, 20000);
-      setConnection('online', 'Сервер работает');
-      $('statAI').textContent = data.aiConfigured ? 'ON' : 'OFF';
-      $('statAI').style.color = data.aiConfigured ? 'var(--accent2)' : 'var(--danger)';
-      if (showMessage) {
-        showNotice(
-          'settingsNotice',
-          data.aiConfigured
-            ? 'Соединение успешно. Сервер работает, ключ ИИ настроен.'
-            : 'Сервер доступен, но GEMINI_API_KEY не настроен в Render.',
-          data.aiConfigured ? 'success' : 'error'
-        );
-      }
-      return data;
-    } catch (error) {
-      setConnection('offline', 'Нет соединения');
-      $('statAI').textContent = '—';
-      if (showMessage) showNotice('settingsNotice', error.message, 'error');
-      return null;
-    }
-  }
-  function buildPrompt(values) {
-    return [
-      'Ты — опытный специалист по B2B-продажам и персонализированному первому контакту.',
-      'Создай ОДНО готовое сообщение потенциальному клиенту на русском языке.',
-      '',
-      'Компания или контакт: ' + (values.company || 'не указано'),
-      'Сфера: ' + (values.niche || 'не указана'),
-      'Канал: ' + values.channel,
-      'Предложение: ' + values.offer,
-      'Наблюдения о клиенте: ' + (values.signal || 'конкретные сведения не предоставлены'),
-      'Цель: ' + values.goal,
-      'Стиль: ' + values.tone,
-      '',
-      'Требования:',
-      '1. Сообщение должно быть естественным и персонализированным.',
-      '2. Не выдумывай факты о компании, её результатах, клиентах или проблемах.',
-      '3. Не обещай гарантированный рост продаж и не используй ложную срочность.',
-      '4. Не начинай с банального «Здравствуйте, предлагаем наши услуги» без контекста.',
-      '5. Не пиши, что ты ИИ.',
-      '6. Не добавляй комментарии, пояснения, заголовки или кавычки вокруг сообщения.',
-      '7. Сделай текст уместным для выбранного канала. Для мессенджера — коротко, для email — структурно.',
-      '8. В конце используй лёгкий вопрос или понятный следующий шаг.',
-      '9. Если данных мало, используй осторожную формулировку без выдуманных деталей.',
-      '10. Не создавай массовую рассылку и не используй агрессивное давление.',
-      '',
-      'Верни только готовый текст сообщения.'
-    ].join('\n');
-  }
-  function getFormValues() {
-    return {
-      company: $('company').value.trim(),
-      niche: $('niche').value.trim(),
-      channel: $('channel').value,
-      offer: $('offer').value.trim(),
-      signal: $('signal').value.trim(),
-      goal: $('goal').value,
-      tone: $('tone').value
-    };
-  }
-  function renderOutput(text) {
-    currentResult = text;
-    const output = $('output');
-    output.classList.remove('empty');
-    output.textContent = text;
-    $('copyBtn').disabled = !text;
-    $('sendTgBtn').disabled = !text;
-    $('regenerateBtn').disabled = !lastRequest || isGenerating;
-  }
-  function clearOutput() {
-    currentResult = '';
-    $('output').classList.add('empty');
-    $('output').innerHTML =
-      '<div class="empty-inner"><div class="empty-icon">✧</div><strong>Здесь появится сообщение</strong><p>Заполни предложение и нажми кнопку генерации. Ответ придёт от ИИ через твой backend.</p></div>';
-    $('copyBtn').disabled = true;
-    $('sendTgBtn').disabled = true;
-    $('regenerateBtn').disabled = !lastRequest || isGenerating;
-    hideNotice('outputNotice');
-  }
-  function updateStats() {
-    const count = Number(readStorage(COUNT_KEY, 0)) || 0;
-    $('statGenerated').textContent = count.toLocaleString('ru-RU');
-    $('statHistory').textContent = history.length.toLocaleString('ru-RU');
-    $('historyCount').textContent = history.length + (history.length === 1 ? ' запись' : history.length >= 2 && history.length <= 4 ? ' записи' : ' записей');
-  }
-  function formatDate(value) {
-    try {
-      return new Date(value).toLocaleString('ru-RU', {
-        day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit'
-      });
-    } catch {
-      return '';
-    }
-  }
-  function renderHistory() {
-    const list = $('historyList');
-    list.innerHTML = '';
-    if (!history.length) {
-      const empty = document.createElement('div');
-      empty.className = 'empty-history';
-      empty.textContent = 'Здесь будут сохранены созданные сообщения.';
-      list.appendChild(empty);
-      updateStats();
-      return;
-    }
-    history.slice(0, 20).forEach((item) => {
-      const row = document.createElement('div');
-      row.className = 'history-item';
-      const main = document.createElement('div');
-      main.className = 'history-main';
-      main.tabIndex = 0;
-      main.setAttribute('role', 'button');
-      main.setAttribute('aria-label', 'Открыть сообщение из истории');
-      const title = document.createElement('strong');
-      title.textContent = item.company || item.niche || 'Сообщение без названия';
-      const preview = document.createElement('p');
-      preview.textContent = item.text || '';
-      const date = document.createElement('div');
-      date.className = 'history-date';
-      date.textContent = formatDate(item.createdAt);
-      main.append(title, preview, date);
-      const buttons = document.createElement('div');
-      buttons.className = 'history-buttons';
-      const copy = document.createElement('button');
-      copy.className = 'icon-btn';
-      copy.type = 'button';
-      copy.textContent = '⧉';
-      copy.title = 'Копировать';
-      copy.setAttribute('aria-label', 'Копировать сообщение');
-      copy.addEventListener('click', () => copyText(item.text));
-      const remove = document.createElement('button');
-      remove.className = 'icon-btn';
-      remove.type = 'button';
-      remove.textContent = '×';
-      remove.title = 'Удалить';
-      remove.setAttribute('aria-label', 'Удалить запись');
-      remove.addEventListener('click', () => {
-        history = history.filter((entry) => entry.id !== item.id);
-        writeStorage(HISTORY_KEY, history);
-        renderHistory();
-      });
-      main.addEventListener('click', () => {
-        renderOutput(item.text);
-        lastRequest = item.values || null;
-        $('regenerateBtn').disabled = !lastRequest;
-        $('output').scrollIntoView({ behavior: 'smooth', block: 'center' });
-      });
-      main.addEventListener('keydown', (event) => {
-        if (event.key === 'Enter' || event.key === ' ') {
-          event.preventDefault();
-          main.click();
-        }
-      });
-      buttons.append(copy, remove);
-      row.append(main, buttons);
-      list.appendChild(row);
-    });
-    updateStats();
-  }
-  async function copyText(text) {
-    if (!text) return;
-    try {
-      await navigator.clipboard.writeText(text);
-      showNotice('outputNotice', 'Текст скопирован.', 'success');
-    } catch {
-      const area = document.createElement('textarea');
-      area.value = text;
-      area.style.position = 'fixed';
-      area.style.opacity = '0';
-      document.body.appendChild(area);
-      area.select();
-      let success = false;
-      try { success = document.execCommand('copy'); } catch {}
-      area.remove();
-      showNotice(
-        'outputNotice',
-        success ? 'Текст скопирован.' : 'Не удалось скопировать автоматически. Выдели и скопируй текст вручную.',
-        success ? 'success' : 'error'
-      );
-    }
-  }
-  async function generateMessage(values = getFormValues()) {
-    if (isGenerating) return;
-    if (!values.offer || !values.offer.trim()) {
-      showNotice('formNotice', 'Сначала напиши, что именно ты предлагаешь клиенту.', 'error');
-      $('offer').focus();
-      return;
-    }
-    lastRequest = { ...values };
-    isGenerating = true;
-    const button = $('generateBtn');
-    const originalText = '✦ Создать персональное сообщение';
-    button.disabled = true;
-    button.innerHTML = '<span class="loader"></span>ИИ создаёт сообщение…';
-    $('regenerateBtn').disabled = true;
-    hideNotice('formNotice');
-    hideNotice('outputNotice');
-    try {
-      const data = await requestJson(getApiBase() + '/api/generate', {
-        method: 'POST',
-        body: JSON.stringify({ prompt: buildPrompt(values) })
-      }, 60000);
-      const result = typeof data.result === 'string' ? data.result.trim() : '';
-      if (!result) {
-        throw new Error('Сервер ответил, но поле result пустое. Проверь формат ответа backend.');
-      }
-      renderOutput(result);
-      const item = {
-        id: Date.now().toString(36) + Math.random().toString(36).slice(2, 8),
-        company: values.company,
-        niche: values.niche,
-        text: result,
-        values: { ...values },
-        createdAt: new Date().toISOString()
-      };
-      history.unshift(item);
-      history = history.slice(0, 50);
-      writeStorage(HISTORY_KEY, history);
-      const count = (Number(readStorage(COUNT_KEY, 0)) || 0) + 1;
-      try { localStorage.setItem(COUNT_KEY, String(count)); } catch {}
-      renderHistory();
-      showNotice('formNotice', 'Сообщение создано и сохранено в истории.', 'success');
-      showNotice('outputNotice', 'Готово. Проверь текст перед отправкой клиенту.', 'success');
-    } catch (error) {
-      showNotice('formNotice', error.message || 'Неизвестная ошибка генерации.', 'error');
-      showNotice('outputNotice', 'Генерация не удалась. Текст не был подменён шаблоном.', 'error');
-    } finally {
-      isGenerating = false;
-      button.disabled = false;
-      button.textContent = originalText;
-      $('regenerateBtn').disabled = !lastRequest || !currentResult;
-    }
-  }
+const DEFAULT_API = 'https://leadpilot-pro.onrender.com';
+const SETTINGS_KEY = 'leadpilot_pro_settings_v3';
+const $ = (id) => document.getElementById(id);
+let settings = JSON.parse(localStorage.getItem(SETTINGS_KEY)) || { apiBase: DEFAULT_API, tgChatId: '' };
+let currentResult = '';
+let isGenerating = false;
 
-  async function sendToTelegram() {
-    const chatId = $('tgChatId').value.trim();
-    if (!chatId) {
-      showNotice('outputNotice', 'Введи свой Telegram ID!', 'error');
-      return;
-    }
-    if (!currentResult) {
-      showNotice('outputNotice', 'Сначала сгенерируй сообщение!', 'error');
-      return;
-    }
+function getApiBase() {
+  return ($('apiBase').value || settings.apiBase || DEFAULT_API).trim().replace(/\/+$/, '');
+}
 
-    const btn = $('sendTgBtn');
-    const originalText = btn.innerHTML;
-    btn.disabled = true;
-    btn.innerHTML = '<span class="loader"></span>Отправка...';
-    hideNotice('outputNotice');
+function showNotice(id, msg, type) {
+  const box = $(id);
+  box.textContent = msg;
+  box.className = 'notice show ' + type;
+}
 
-    try {
-      const response = await requestJson(getApiBase() + '/api/send-telegram', {
-        method: 'POST',
-        body: JSON.stringify({ chatId: chatId, message: currentResult })
-      }, 30000);
+async function requestJson(url, options, timeout = 60000) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeout);
+  try {
+    const res = await fetch(url, { ...options, signal: controller.signal, headers: { 'Content-Type': 'application/json' } });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
+    return data;
+  } catch (e) {
+    throw new Error(e.name === 'AbortError' ? 'Таймаут сервера.' : e.message);
+  } finally { clearTimeout(timer); }
+}
 
-      if (response.success) {
-        showNotice('outputNotice', '✅ Сообщение успешно отправлено в Telegram!', 'success');
-        // Сохраняем ID для будущих отправок
-        settings.tgChatId = chatId;
-        writeStorage(SETTINGS_KEY, settings);
-      } else {
-        throw new Error(response.error || 'Неизвестная ошибка');
-      }
-    } catch (error) {
-      showNotice('outputNotice', 'Ошибка отправки: ' + error.message, 'error');
-    } finally {
-      btn.disabled = false;
-      btn.innerHTML = originalText;
-    }
+function setConnection(state, text) {
+  const status = $('connectionStatus');
+  status.className = 'status ' + state;
+  $('connectionText').textContent = text;
+}
+
+async function checkBackend() {
+  try {
+    const data = await requestJson(getApiBase() + '/api/health', { method: 'GET' }, 20000);
+    setConnection('online', 'Сервер работает');
+  } catch (e) { setConnection('offline', 'Нет связи'); }
+}
+
+function switchTab(tab) {
+  $('sectionAi').style.display = tab === 'ai' ? 'block' : 'none';
+  $('sectionEmail').style.display = tab === 'email' ? 'block' : 'none';
+  $('tabAi').className = tab === 'ai' ? 'btn btn-primary' : 'btn';
+  $('tabEmail').className = tab === 'email' ? 'btn btn-primary' : 'btn';
+}
+
+// Генерация ИИ
+$('generateBtn').onclick = async () => {
+  if (isGenerating) return;
+  const offer = $('offer').value.trim();
+  if (!offer) return showNotice('formNotice', 'Напиши предложение!', 'error');
+  isGenerating = true;
+  const btn = $('generateBtn');
+  const old = btn.innerHTML;
+  btn.innerHTML = '<span class="loader"></span>Генерация...';
+  btn.disabled = true;
+  
+  const prompt = `Ты эксперт по продажам. Напиши сообщение для компании ${$('company').value} в сфере ${$('niche').value}. Предложение: ${offer}. Стиль: дружелюбный.`;
+  
+  try {
+    const data = await requestJson(getApiBase() + '/api/generate', { method: 'POST', body: JSON.stringify({ prompt }) });
+    currentResult = data.result;
+    $('output').textContent = currentResult;
+    $('output').classList.remove('empty');
+    $('copyBtn').disabled = false;
+    $('sendTgBtn').disabled = false;
+    showNotice('formNotice', 'Готово!', 'success');
+  } catch (e) { showNotice('formNotice', e.message, 'error'); }
+  finally { isGenerating = false; btn.innerHTML = old; btn.disabled = false; }
+};
+
+// Копирование
+$('copyBtn').onclick = () => {
+  navigator.clipboard.writeText(currentResult);
+  showNotice('outputNotice', 'Скопировано!', 'success');
+};
+
+// Отправка в ТГ
+$('sendTgBtn').onclick = async () => {
+  const id = $('tgChatId').value.trim();
+  if (!id) return showNotice('outputNotice', 'Введи свой ID!', 'error');
+  const btn = $('sendTgBtn');
+  const old = btn.innerHTML;
+  btn.innerHTML = '<span class="loader"></span>...';
+  btn.disabled = true;
+  try {
+    await requestJson(getApiBase() + '/api/send-telegram', { method: 'POST', body: JSON.stringify({ chatId: id, message: currentResult }) });
+    showNotice('outputNotice', '✅ Отправлено!', 'success');
+    settings.tgChatId = id; localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
+  } catch (e) { showNotice('outputNotice', e.message, 'error'); }
+  finally { btn.innerHTML = old; btn.disabled = false; }
+};
+
+// Отправка Email
+$('sendEmailBtn').onclick = async () => {
+  const emails = $('emailList').value.split('\n').map(e => e.trim()).filter(e => e);
+  const subject = $('emailSubject').value;
+  const text = $('emailBody').value;
+  
+  if (!emails.length) return showNotice('emailNotice', 'Добавь хотя бы один email!', 'error');
+  if (!text) return showNotice('emailNotice', 'Напиши текст письма!', 'error');
+
+  const btn = $('sendEmailBtn');
+  const old = btn.innerHTML;
+  btn.innerHTML = '<span class="loader"></span>Отправляем... (это может занять время)';
+  btn.disabled = true;
+  showNotice('emailNotice', 'Процесс пошел...', 'info');
+
+  try {
+    const data = await requestJson(getApiBase() + '/api/send-email', {
+      method: 'POST',
+      body: JSON.stringify({ emails, subject, text })
+    }, 300000);
+    showNotice('emailNotice', '✅ ' + data.message, 'success');
+  } catch (e) {
+    showNotice('emailNotice', 'Ошибка: ' + e.message, 'error');
+  } finally {
+    btn.innerHTML = old;
+    btn.disabled = false;
   }
+};
 
-  const presets = {
-    automation: {
-      offer: 'AI-автоматизация обработки входящих заявок, первичная квалификация потенциальных клиентов и помощь с ответами на типовые вопросы.',
-      goal: 'Начать диалог',
-      tone: 'Дружелюбный и естественный'
-    },
-    content: {
-      offer: 'Помогаю превращать экспертный контент в обращения потенциальных клиентов с помощью AI-инструментов и продуманной структуры публикаций.',
-      goal: 'Предложить короткую демонстрацию',
-      tone: 'Уверенный и деловой'
-    },
-    website: {
-      offer: 'Создание понятной посадочной страницы с описанием услуг, преимуществ и простым способом оставить заявку.',
-      goal: 'Предложить короткую демонстрацию',
-      tone: 'Короткий, прямой, без воды'
-    },
-    followup: {
-      offer: 'Хочу аккуратно возобновить диалог и понять, актуальна ли тема автоматизации или улучшения обработки заявок.',
-      goal: 'Вернуться к старому контакту',
-      tone: 'Неформальный и живой'
-    }
-  };
-  document.querySelectorAll('[data-preset]').forEach((button) => {
-    button.addEventListener('click', () => {
-      const preset = presets[button.dataset.preset];
-      if (!preset) return;
-      $('offer').value = preset.offer;
-      $('goal').value = preset.goal;
-      $('tone').value = preset.tone;
-      document.querySelectorAll('[data-preset]').forEach((el) => el.classList.remove('active'));
-      button.classList.add('active');
-      hideNotice('formNotice');
-    });
-  });
-  $('generateBtn').addEventListener('click', () => generateMessage());
-  $('regenerateBtn').addEventListener('click', () => {
-    if (lastRequest) generateMessage(lastRequest);
-  });
-  $('copyBtn').addEventListener('click', () => copyText(currentResult));
-  $('sendTgBtn').addEventListener('click', sendToTelegram);
-  $('clearOutputBtn').addEventListener('click', clearOutput);
-  $('settingsToggle').addEventListener('click', () => {
-    $('settingsPanel').classList.toggle('open');
-    if ($('settingsPanel').classList.contains('open')) {
-      $('settingsPanel').scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  });
-  $('saveSettingsBtn').addEventListener('click', () => {
-    const apiBase = getApiBase();
-    if (!/^https?:\/\//i.test(apiBase)) {
-      showNotice('settingsNotice', 'Адрес сервера должен начинаться с https:// или http://', 'error');
-      return;
-    }
-    settings = {
-      apiBase,
-      defaultOffer: $('defaultOffer').value.trim(),
-      tgChatId: settings.tgChatId // сохраняем старый ID
-    };
-    const saved = writeStorage(SETTINGS_KEY, settings);
-    if (settings.defaultOffer) $('offer').value = settings.defaultOffer;
-    showNotice(
-      'settingsNotice',
-      saved ? 'Настройки сохранены на этом устройстве.' : 'Браузер не разрешил сохранить настройки.',
-      saved ? 'success' : 'error'
-    );
-    checkBackend(false);
-  });
-  $('testConnectionBtn').addEventListener('click', () => checkBackend(true));
-  $('resetSettingsBtn').addEventListener('click', () => {
-    settings = { apiBase: DEFAULT_API, defaultOffer: '', tgChatId: '' };
-    $('apiBase').value = DEFAULT_API;
-    $('defaultOffer').value = '';
-    $('offer').value = '';
-    writeStorage(SETTINGS_KEY, settings);
-    showNotice('settingsNotice', 'Настройки сброшены.', 'success');
-    checkBackend(false);
-  });
-  $('clearHistoryBtn').addEventListener('click', () => {
-    if (!history.length) {
-      showNotice('outputNotice', 'История уже пустая.', 'info');
-      return;
-    }
-    if (!window.confirm('Удалить всю историю сообщений на этом устройстве?')) return;
-    history = [];
-    writeStorage(HISTORY_KEY, history);
-    renderHistory();
-    showNotice('outputNotice', 'История очищена.', 'success');
-  });
-  function init() {
-    $('apiBase').value = settings.apiBase || DEFAULT_API;
-    $('defaultOffer').value = settings.defaultOffer || '';
-    if (settings.defaultOffer && !$('offer').value) {
-      $('offer').value = settings.defaultOffer;
-    }
-    if (settings.tgChatId) {
-      $('tgChatId').value = settings.tgChatId;
-    }
-    renderHistory();
-    updateStats();
-    checkBackend(false);
-  }
-  init();
-})();
+// Инициализация
+$('apiBase').value = settings.apiBase || DEFAULT_API;
+if (settings.tgChatId) $('tgChatId').value = settings.tgChatId;
+checkBackend();
 </script>
 </body>
 </html>
