@@ -18,12 +18,12 @@ if (process.env.TELEGRAM_BOT_TOKEN) {
 }
 const ADMIN_CHAT_ID = process.env.ADMIN_CHAT_ID;
 
-// Настройка почты (Gmail)
+// Настройка почты
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
     user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS // Это пароль приложения, не обычный пароль от почты!
+    pass: process.env.EMAIL_PASS
   }
 });
 
@@ -32,58 +32,71 @@ app.get('/api/health', (req, res) => {
 });
 
 // 1. Генерация текста
-app.post('/api/generate', async (req, res) => {
+app.post(['/api/generate', '/api/chat'], async (req, res) => {
   try {
-    const prompt = req.body.prompt || req.body.text;
+    const promptText = req.body.prompt || req.body.text || req.body.message;
+    if (!promptText) return res.status(400).json({ error: 'Нет текста' });
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
     const model = genAI.getGenerativeModel({ model: "gemini-3.8-flash" });
-    const result = await model.generateContent(prompt);
+    const result = await model.generateContent(promptText);
     res.json({ success: true, result: result.response.text() });
-  } catch (e) { res.status(500).json({ error: e.message }); }
+  } catch (error) {
+    res.status(500).json({ error: 'Ошибка ИИ', details: error.message });
+  }
 });
 
-// 2. Массовая отправка Email
+// 2. Отправка в Telegram (из интерфейса)
+app.post('/api/send-telegram', async (req, res) => {
+  try {
+    const { chatId, message } = req.body;
+    if (!bot) return res.status(500).json({ error: 'Бот не настроен' });
+    await bot.sendMessage(chatId, message);
+    res.json({ success: true, message: 'Отправлено!' });
+  } catch (error) {
+    res.status(500).json({ error: 'Ошибка ТГ', details: error.message });
+  }
+});
+
+// 3. Массовая Email-рассылка
 app.post('/api/send-email', async (req, res) => {
   try {
-    const { emails, subject, bodyTemplate } = req.body;
+    const { emails, subject, text } = req.body;
     if (!emails || !emails.length) return res.status(400).json({ error: 'Нет email-ов' });
 
     let sentCount = 0;
     for (const email of emails) {
-      // В реальности тут нужно генерить персональный текст, но для примера шлем шаблон
       const mailOptions = {
         from: process.env.EMAIL_USER,
-        to: email,
-        subject: subject,
-        text: bodyTemplate
+        to: email.trim(),
+        subject: subject || 'Предложение о сотрудничестве',
+        text: text
       };
       await transporter.sendMail(mailOptions);
       sentCount++;
       await new Promise(r => setTimeout(r, 2000)); // Пауза 2 сек, чтобы Gmail не забанил
     }
     res.json({ success: true, message: `Отправлено на ${sentCount} адресов.` });
-  } catch (e) { res.status(500).json({ error: e.message }); }
+  } catch (e) { 
+    res.status(500).json({ error: e.message }); 
+  }
 });
 
-// 3. Охотник (Парсинг веб-версий ТГ-каналов)
+// 4. Охотник (Парсинг веб-версий ТГ-каналов)
 async function runHunter() {
   console.log("Сканируем каналы...");
-  // Список открытых каналов/чатов, где ищут заказы
   const channels = ['freelancetaverna', 'normrabota', 'zapwork']; 
 
   try {
     for (const ch of channels) {
-      const url = `https://t.me/s/${ch}`; // Веб-версия канала
+      const url = `https://t.me/s/${ch}`;
       const { data } = await axios.get(url);
       const $ = cheerio.load(data);
 
-      // Берем последние 3 сообщения
       const messages = $('.tgme_widget_message_text').slice(-3);
 
       messages.each(async (i, el) => {
         const text = $(el).text();
         if (/сайт|бот|верстка|дизайн|автоматизац/i.test(text)) {
-          
           const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
           const model = genAI.getGenerativeModel({ model: "gemini-3.8-flash" });
           const prompt = `Заказчик пишет: "${text}". Напиши мне короткий, цепляющий ответ в TG (предлагаю услуги веб-разработки и ботов).`;
@@ -98,7 +111,6 @@ async function runHunter() {
   } catch (e) { console.error("Ошибка охотника:", e.message); }
 }
 
-// Запускаем охотника раз в час (3600000 мс)
 setInterval(runHunter, 3600000);
 app.get('/api/hunt', (req, res) => { runHunter(); res.json({ status: 'Сканирую...' }); });
 
