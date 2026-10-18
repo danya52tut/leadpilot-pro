@@ -35,8 +35,9 @@ app.post(['/api/generate', '/api/chat'], async (req, res) => {
     }
 
     const genAI = new GoogleGenerativeAI(apiKey);
-    // АКТУАЛЬНАЯ МОДЕЛЬ — gemini-3.8-flash
-    const model = genAI.getGenerativeModel({ model: "gemini-3.8-flash" });
+    
+    // САМАЯ СТАБИЛЬНАЯ МОДЕЛЬ
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
     const result = await model.generateContent(promptText);
     const response = await result.response;
