@@ -18,20 +18,33 @@ if (process.env.TELEGRAM_BOT_TOKEN) {
 }
 const ADMIN_CHAT_ID = process.env.ADMIN_CHAT_ID;
 
-// Настройка почты
+// --- Почта ---
+const getMailConfig = () => {
+  const service = process.env.EMAIL_SERVICE || 'mail';
+  if (service === 'yandex') return { host: 'smtp.yandex.ru', port: 465, secure: true };
+  return { host: 'smtp.mail.ru', port: 465, secure: true };
+};
+
 const transporter = nodemailer.createTransport({
-  service: 'gmail',
+  ...getMailConfig(),
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS
   }
 });
 
+// --- Health Check ---
 app.get('/api/health', (req, res) => {
-  res.json({ status: 'ok', ai: !!process.env.GEMINI_API_KEY, tg: !!process.env.TELEGRAM_BOT_TOKEN, email: !!process.env.EMAIL_USER });
+  res.json({ 
+    status: 'ok', 
+    ai: !!process.env.GEMINI_API_KEY, 
+    tg: !!process.env.TELEGRAM_BOT_TOKEN, 
+    email: !!process.env.EMAIL_USER,
+    hunter: 'active' // Показывает, что маршрут охотника существует
+  });
 });
 
-// 1. Генерация текста
+// --- Генерация текста ---
 app.post(['/api/generate', '/api/chat'], async (req, res) => {
   try {
     const promptText = req.body.prompt || req.body.text || req.body.message;
@@ -45,7 +58,7 @@ app.post(['/api/generate', '/api/chat'], async (req, res) => {
   }
 });
 
-// 2. Отправка в Telegram (из интерфейса)
+// --- Отправка в Telegram ---
 app.post('/api/send-telegram', async (req, res) => {
   try {
     const { chatId, message } = req.body;
@@ -57,7 +70,7 @@ app.post('/api/send-telegram', async (req, res) => {
   }
 });
 
-// 3. Массовая Email-рассылка
+// --- Массовая Email-рассылка ---
 app.post('/api/send-email', async (req, res) => {
   try {
     const { emails, subject, text } = req.body;
@@ -73,7 +86,7 @@ app.post('/api/send-email', async (req, res) => {
       };
       await transporter.sendMail(mailOptions);
       sentCount++;
-      await new Promise(r => setTimeout(r, 2000)); // Пауза 2 сек, чтобы Gmail не забанил
+      await new Promise(r => setTimeout(r, 2000));
     }
     res.json({ success: true, message: `Отправлено на ${sentCount} адресов.` });
   } catch (e) { 
@@ -81,7 +94,7 @@ app.post('/api/send-email', async (req, res) => {
   }
 });
 
-// 4. Охотник (Парсинг веб-версий ТГ-каналов)
+// --- Охотник (Парсинг веб-версий ТГ-каналов) ---
 async function runHunter() {
   console.log("Сканируем каналы...");
   const channels = ['freelancetaverna', 'normrabota', 'zapwork']; 
@@ -111,7 +124,13 @@ async function runHunter() {
   } catch (e) { console.error("Ошибка охотника:", e.message); }
 }
 
+// --- Маршрут для ручного запуска Охотника ---
+app.get('/api/hunt', (req, res) => {
+  runHunter();
+  res.json({ status: 'Сканирую...' });
+});
+
+// Запускаем охотника раз в час
 setInterval(runHunter, 3600000);
-app.get('/api/hunt', (req, res) => { runHunter(); res.json({ status: 'Сканирую...' }); });
 
 app.listen(port, () => console.log(`Server running on ${port}`));
